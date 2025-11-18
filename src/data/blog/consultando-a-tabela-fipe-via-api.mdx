@@ -1,0 +1,68 @@
+---
+title: "Consultando a Tabela Fipe via API."
+publishDate: 2 Oct 2023
+description: Uma nova maneira de consultar a Tabela Fipe programaticamente.
+---
+
+A [Tabela Fipe](https://veiculos.fipe.org.br) é um excelente recurso de pesquisa para quem possui, ou para quem pretende adquirir um carro. A iniciativa de padronizar o preço médio de comercialização dos carros novos e usados facilita muito a negociação e, de certa forma, alimenta a precificação de toda uma cadeia de produtos do mercado automotivo.
+
+Por conta disso é um sonho de muita gente ter acesso a esses dados em formato de API para que possa ser inserido dentro de suas próprias aplicações. O problema é que a FIPE (sim, esse é o nome da fundação e não o nome da tabela de preço de carros) não disponibiliza esse dado estruturado para consultas.
+
+Pela internet existe algumas iniciativas de transformar esses dados em API, mas todas elas sofrem com a falta de alguma coisa: dados atualizados, performance dos endpoints, dificuldade de configuração e por aí vai...
+
+## **<u>[Entra então a minha ideia => fipe.amb1.io](https://fipe.amb1.io)</u>**
+
+<br />
+<br />
+<video
+  src="/assets/blog/consultando-a-tabela-fipe-via-api/fipe-apresentacao.mp4"
+  autoplay
+  mute
+  controls
+  style="max-width: 100%"
+></video>
+<br />
+<br />
+### Como adquirir os dados A primeira atitude foi **não** utilizar a estrutura
+já existente no site da Tabela Fipe. Para isso o processo de scrapping usando
+python se fez necessário e as informações foram baixadas para uma instância do
+MongoDB.
+
+### Busca com autocomplete
+
+O jeito que é apresentado as informações para a busca é muito quadrado e eu achei que precisava ser algo mais orgânico como **<u>autocomplete</u>**. Por isso, ao invés de selecionar passo a passo a marca, modelo e versão do carro, agora é necessário apenas buscar o ano desejado de maneira separada após selecionar o veículo e sua versão.
+
+![imagem do mecanismo de busca do site fipe.amb1.io](/assets/blog/consultando-a-tabela-fipe-via-api/autocomplete.png)
+
+### Lista de valores
+
+Para cada veículo encontrado é possível obter todos os valores **do ano de 2023** começando em Janeiro/2023. O site também insere uma porcentagem de valorização/desvalorização relativas ao mês anterior e ao começo do ano para dar uma ideia do estado atual dos preços de cada modelo.
+
+![imagem dos cars de preços dos últimos meses para o veículo citroen c3 1.5 versão exclusive no site fipe.amb1.io](/assets/blog/consultando-a-tabela-fipe-via-api/precos.png)
+
+## Mas... cadê a API ?
+
+O site em questão é uma grande revisão de como um site de busca de valores poderia ser. Por dentro, porém, ele foi construído uma série de endpoints próprios onde é possível consultar individualmente cada entidade do projeto:
+
+- Marcas
+- Modelos
+- Variações de modelos (c3 Tendance ou Exclusive, por exemplo)
+- Preço da variação
+
+Para ter acesso às consultas, é necessário uma chave de acesso. Por enquanto, é possível pegar a chave do próprio site e explorar as chamadas que são feitas por ele para entender melhor como a API funciona.
+
+<video
+  src="/assets/blog/consultando-a-tabela-fipe-via-api/fipe-novidades.mp4"
+  autoplay
+  mute
+  controls
+  style="max-width: 100%"
+></video>
+
+Mas em breve será possível pegar uma chave personalizada por cadastro para obter dados históricos assim como os atuais de maneira automatizada. Para isso, basta se cadastrar ao final do site para receber o meu email avisando das novidades 😄
+
+### Stack
+
+- [MongoDB Atlas](http://mongodb.com) com [Data API](https://www.mongodb.com/docs/atlas/app-services/data-api/) para armazenamento e backend as a service
+- [Python](https://www.python.org) para scrapper a manipulações em geral
+- [Nuxt](http://nuxt.com) para interface e gerenciamento de estado

@@ -1,0 +1,136 @@
+---
+title: Criando imagens dinamicamente com Sharp e Nodejs
+publishDate: 26 May 2022
+description: Fazendo imagens dinamicamente usando para o Nodejs
+---
+O [Sharp](https://www.npmjs.com/package/sharp) é um dos pacotes mais famosos dentro do ecossistema do Nodejs, sendo a indicação mais fácil para manipulação, conversão e até mesmo edição de imagens, sendo listado como dependência em vários outros grandes projetos que estendem o uso dessas funcionalidades. Mas uma coisa que pouco se fala é a funcionalidade de criar uma nova imagem do zero com Sharp, é sobre isso que vamos falar. 
+
+<figure>
+  <img src="/assets/blog/criando-imagens-dinamicamente-com-sharp-e-nodejs/image1.png" />
+  <figcaption>Essa imagem foi gerada com o Sharp para o projeto @hashflagsbot</figcaption>
+</figure>
+
+## TL;DR
+Para fazer uma imagem parecida com a de baixo você vai precisar fazer diversas chamadas para o método `composite`, como se fosse um sistema de camadas do Photoshop, além de precisar fazer uso de `Buffer` e pacotes `SVG` para textos.
+
+## Criando uma imagem
+Nessa primeira etapa vamos focar nesta página da [documentação oficial do Sharp sobre Compositing](https://sharp.pixelplumbing.com/api-composite)
+Nessa primeira etapa vamos focar nesta página da documentação oficial do Sharp sobre Compositing
+
+Parar criar uma nova imagem, basta criar uma instância nova passando alguns parâmetros dentro da chave `create`, ao final chamamos o método `.png()` para avisar o Sharp que estamos criando uma nova imagem do tipo png.
+
+Como resposta recebemos um `buffer` contendo essas informações que será alimento para as próximas funções que vamos chamar. 
+
+```
+ // Criando o objeto de parametros da instância
+  const sharpNewImage = {
+    create: {
+      width: 1200,
+      height: 600,
+      channels: 3,
+      background: {
+        r: 239,
+        g: 246,
+        b: 255,
+      },
+    },
+  };
+  // Criando nova instância. A variavel estará com com Buffer()
+  // contendo essas informações.
+  const newImage = sharp(sharpNewImage).png();
+```
+
+Onde dentro do `create` temos algumas das propriedades abaixo. 
+
+### width
+É a largura da imagem em pixels (no exemplo configurado para 1200px)
+
+### height
+É a altura da imagem em pixels (no exemplo configurado para 600)
+
+### channels
+É a quantidade de canais de cores baseado no padrão RGBA (red, green, blue, alpha) onde o último valor é possível de controlar a transparência da imagem como um todo.
+
+### background
+É o objeto de cores que recebem o valor numérico de cada cor (0-255) de acordo com a quantidade de canais que foi selecionado anteriormente.
+
+## Usando composite
+Agora que temos a imagem base de trabalho como adicionamos elementos "em cima" dela? Usando o método `composite`. Ele é responsável por "juntar" diferentes imagens e devolver o resultado para que possamos continuar o trabalho. Para inserir novas imagens e textos basta chamar o `composite` várias vezes na mesma instância que ele fará o resto do trabalho
+
+```
+// Criando uma nova "camada" com uma imagem 
+newImage.composite({
+  input: 'image.png',
+  top: 200,
+  left: 400,
+});
+```
+
+Onde dentro do composite temos algumas das propriedades abaixo. Existem ainda outras propriedades por isso aconselho a ler a [documentação com atenção](https://sharp.pixelplumbing.com/api-composite#parameters). Alguns interessantes são blend, animated e raw
+
+### Input
+Aqui informamos qual é a imagem que queremos inserir na nossa base. O Sharp aceita até uma instância dele mesmo, ou seja, você pode encadear transformações uma na outra. 
+
+### Top
+é a distância, em pixels, que a nova imagem vai ter tomar de espaço em relação ao topo da imagem base
+
+### Left
+é a distância, em pixels, que a nova imagem vai ter tomar de espaço em relação a lateral esquerda da imagem base
+
+## Adicionando textos
+Aqui é que mora o segredo já que o Sharp suporta alguns tipos de imagem como: `jpeg`, `png`, `webp`, `gif`, `svg` é possível criar textos em svg e inseri-los dentro da imagem Base tudo via código. 
+
+xiste uma infinidade de pacotes para criar textos em SVG no Node, mas para o exemplo abaixo vou utilizar o [text-to-svg](https://www.npmjs.com/package/text-to-svg) que ajuda a transformar o texto em vetor, o que faz toda a diferença para a consistência do conteúdo que queremos inserir.
+
+```
+const TextToSVG = require('text-to-svg');
+const textToSVG = TextToSVG.loadSync();
+ 
+const attributes = {fill: 'red', stroke: 'black'};
+const options = {x: 0, y: 0, fontSize: 72, anchor: 'top', attributes: attributes};
+ 
+const svg = textToSVG.getSVG('Hello World', options); 
+```
+
+Com o SVG devidamente criado é hora de preparar ele para o Sharp. 
+```
+// Image SVG criada
+const svg = textToSVG.getSVG('Hello World', options); 
+
+// Transformamos o SVG em Buffer para que o Sharp consiga enxergar
+const SvgText = Buffer.from(svg);
+
+// Criando uma nova "camada" dessa vez com o texto.  
+newImage.composite({
+  input: SvgText,
+  top: 300,
+  left: 500,
+});
+```
+
+## Renderizando a nova imagem
+Com a nossa nova imagem feita inteiramente via código está na horar de exportar ela para algum lugar. O Sharp possui alguns métodos de saída diferentes, são eles:
+
+### .toBuffer
+Você pode exportar a nova imagem para um buffer do Node e assim trabalhar com ele em `base64` ou converter para string em outro determinado momento. Para fazer isso basta usar o código abaixo. 
+```
+newImage.toBuffer((err, data, info) => {
+  if (err) console.log(err);
+  console.log("Buffer da imagem", data)
+  console.log("Metadados da imagem", info)
+});
+```
+
+### .toFile
+É possível exportar a imagem diretamente para uma pasta do sistema desde que usado um caminho válido. O primeiro parâmetro é o caminho + o nome da imagem seguindo o caminho absoluto do sistema, por isso se for salvar em uma pasta separada da pasta que reside o script usar os pacotes `path` e `fs`
+
+```
+newImage.toFile('caminho-da-imagem.png',(err) => {
+  if (err) console.log(err);
+});
+```
+
+## Live Demo
+[Uma demonstração pode ser vista aqui.](https://codesandbox.io/embed/sharpjs-example-l755gs?fontsize=14&hidenavigation=1&theme=dark)
+
+<iframe src="https://codesandbox.io/embed/sharpjs-example-l755gs?fontsize=14&amp;hidenavigation=1&amp;theme=dark" style="width:100%; height:500px; border:0; border-radius: 4px; overflow:hidden; margin-left: auto; margin-right: auto; display:block" title="sharpjs-example" allow="accelerometer; ambient-light-sensor; camera; encrypted-media; geolocation; gyroscope; hid; microphone; midi; payment; usb; vr; xr-spatial-tracking" sandbox="allow-forms allow-modals allow-popups allow-presentation allow-same-origin allow-scripts"></iframe>

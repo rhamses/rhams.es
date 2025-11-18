@@ -1,0 +1,85 @@
+---
+title: WEB COMPONENTS - EXEMPLOS e OVERVIEW
+publishDate: 10 Nov 2023
+description: Como usar Web Components no dia a dia
+---
+Web Components já são uma realidade e muitos de nós trabalhamos todo dia usando algum framework JS como React, Vuejs, Angular com vários deles em nosso projeto... Mas e se quisermos trazer essa mesma flexibilidade para um projeto HTML puro?
+
+## Como funciona
+Um Web Component é o resultado do uso de três especificações diferentes: **Custom Elements**, **Shadow Dom** e **HTML Templates**
+
+### [Custom Elements](https://developer.mozilla.org/en-US/docs/Web/API/CustomElementRegistry)
+É a especificação que é responsável por criar e gerenciar elementos HTML customizáveis. É atráves do seu método `.define()` que habilitamos uma nova tag de ser utilizada na página que está inserido.
+Para isso precisamos definir nosso novo elemento e fazemos isso usando uma [classe dentro do JS](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Classes)
+```
+class MyCustomElement extends HTMLElement {
+  static observedAttributes = ["color", "size"];
+
+  constructor() {
+    // Always call super first in constructor
+    super();
+  }
+
+  connectedCallback() {
+    console.log("Custom element added to page.");
+  }
+
+  disconnectedCallback() {
+    console.log("Custom element removed from page.");
+  }
+
+  adoptedCallback() {
+    console.log("Custom element moved to new page.");
+  }
+
+  attributeChangedCallback(name, oldValue, newValue) {
+    console.log(`Attribute ${name} has changed.`);
+  }
+}
+```
+Neste exemplo se tem o ciclo de vida de um Web Component e o mais importante a capacidade de extender qualquer componente HTML já existente (sim, um `<p></p>` ou um `<a></a>` também são componentes!). [O exemplo](https://developer.mozilla.org/en-US/docs/Web/API/Web_components/Using_custom_elements) está extendendo a classe que é um quadro em branco chamado `HTMLElement` que vai nos fornecer toda a estrutura pra criarmos nosso elemento do zero!
+
+## [Shadow DOM](https://developer.mozilla.org/en-US/docs/Web/API/Web_components/Using_shadow_DOM)
+Criar um novo elemento significa inserir um potencial conflito dentro de uma página que já tenha muitas outras tags, scripts e css configurados. O **Shadow DOM** faz esse conflito desaparecer *encapsulando* toda a estrutura que você precisa neste elemento dentro de uma **shadow root** que é como se fosse um novo documento HTML dentro desse elemento. 
+
+**Qualquer elemento pode ter um Shadow DOM** - Com isso você pode manipular toda essa estrutura sem preocupar com conflitos com o documento principal pois são árvores de informação separadas.
+
+E para criar um shadow DOM é muito simples. Toda a interação e manipulação é exatamente igual aos elementos que seriam manipulados dentro de uma página HTML tradicional, com a vantagem de estarem "escondidas" do navegador até o momento que decidimos adiciona-las no nosso elemento.
+
+```
+const host = document.querySelector("#host");
+const shadow = host.attachShadow({ mode: "open" });
+const span = document.createElement("span");
+span.textContent = "I'm in the shadow DOM";
+shadow.appendChild(span);
+```
+O exemplo é um pedaço do exemplo da MDN. Consulte o link do título para ver todo o resto.
+
+## [HTML Templates Tag](https://developer.mozilla.org/en-US/docs/Web/API/Web_components/Using_templates_and_slots)
+Quem veio de Vue.js já esta familiarizado com essas tags. O que eu não sabia era que elas são recomendações W3C!
+
+As tags `<template></template>` e `<slot></slot>` são tags especiais que aceitam receber conteúdo mas não renderizam nada quando a página é carregada pelo navegador. Além disso elas provêm uma forma de serem manipuladas via Javascript que é possível criar uma estrutura HTML que seja equivalente ao código JS que precisamos fazer (como *named slots*)
+```
+HTML
+<template id="my-paragraph">
+  <p>My paragraph</p>
+</template>
+
+JS
+let template = document.getElementById("my-paragraph");
+let templateContent = template.content;
+document.body.appendChild(templateContent);
+```
+
+## Demo
+Criei um [Web Component para receber um número ANS](https://github.com/rhamses/ans-tag) de um plano de saúde. Essa informação é obrigatória para sites da área da saúde e geralmente usa-se imagens para inserir essas informações. Por ser uma tag HTML é possível personalizar o tamanho de acordo com a necessidade apenas mudando o `font-size` da tag.
+![](https://raw.githubusercontent.com/rhamses/ans-tag/main/demo/ans-demo.gif)
+
+## Sites de referência para aprender mais
+- [MDN](https://developer.mozilla.org/en-US/docs/Web/API/Web_components)
+- [WebComponents.org](https://www.webcomponents.org)
+
+## Frameworks que ajudam no dia a dia
+- [Lit](https://lit.dev)
+- [Polymer](https://polymer-library.polymer-project.org)
+- [Stencil](https://stenciljs.com)

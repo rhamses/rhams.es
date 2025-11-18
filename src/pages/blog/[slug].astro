@@ -1,0 +1,93 @@
+---
+import BaseLayout from "../../layouts/BlogBase.astro";
+import Bio from "../../components/blog/Bio.astro";
+import { getCollection, render } from "astro:content";
+
+export async function getStaticPaths() {
+  const posts = await getCollection("blog");
+  return posts.map((p) => ({
+    params: { slug: p.id },
+    props: { post: p },
+  }));
+}
+const { post } = Astro.props;
+const { id, data } = post;
+const { Content } = await render(post);
+const { title, publishDate, description } = data;
+const permalink = `blog/${id}`;
+const toIsoDate = (value: string) => {
+  const parsed = new Date(value);
+  return isNaN(parsed.getTime()) ? value : parsed.toISOString();
+};
+const canonicalUrl = Astro.url.href;
+const heroImage = new URL(`/assets/blog/${id}/capa.jpg`, Astro.url.origin).href;
+const isoPublishDate = toIsoDate(publishDate);
+const blogPostingSchema = {
+  "@context": "https://schema.org",
+  "@type": "BlogPosting",
+  headline: title,
+  description,
+  url: canonicalUrl,
+  mainEntityOfPage: canonicalUrl,
+  image: heroImage,
+  datePublished: isoPublishDate,
+  dateModified: isoPublishDate,
+  author: {
+    "@type": "Person",
+    name: "Rhamsés",
+  },
+  publisher: {
+    "@type": "Organization",
+    name: "Rhamsés",
+    logo: {
+      "@type": "ImageObject",
+      url: new URL("/favicon/android-icon-192x192.png", Astro.url.origin).href,
+    },
+  },
+};
+---
+
+<BaseLayout
+  title={title}
+  description={description}
+  permalink={permalink}
+  current="blog"
+  image={"/assets/blog/" + id + "/capa.jpg"}
+>
+  <header>
+    <p>{publishDate}</p>
+    <h1>{title}</h1>
+    <hr />
+  </header>
+  <div class="container">
+    <article class="content">
+      <Content />
+    </article>
+    <hr />
+    <Bio />
+  </div>
+  <script type="application/ld+json">
+    {JSON.stringify(blogPostingSchema)}
+  </script>
+</BaseLayout>
+<style>
+  header {
+    text-align: center;
+  }
+
+  header h1 {
+    margin-bottom: 0.7em;
+  }
+
+  header p {
+    color: var(--text-secondary);
+    text-transform: uppercase;
+    font-family: var(--font-family-sans);
+    font-weight: 600;
+  }
+
+  header hr {
+    min-width: 100px;
+    width: 30%;
+  }
+</style>

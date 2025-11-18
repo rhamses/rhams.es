@@ -1,0 +1,66 @@
+---
+title: Como animar elementos sem usar Javascript ( e css!)
+publishDate: 13 Feb 2023
+description: Every blog starts with a single post. This is yours. Make it great.
+---
+Às vezes precisamos fazer coisas simples de animação e acabamos recorrendo a saídas mais complicadas como bibliotecas inteiras de javascript ou alguma solução muito rebuscada nos [codepen](https://codepen.io/) da vida enquanto poderíamos usar apenas SVG.
+
+[SVG](https://pt.wikipedia.org/wiki/SVG) é um mundo a parte da pilha web, embora o uso mais conhecido seja para a aplicação de ícones ela é uma plataforma excelente para fazer desde [animações](https://lottiefiles.com/animation/svg) a transições de páginas. 
+
+## Inspiração
+Encontrei esse Tuite aqui mostrando o uso da propriedade `animateMotionque` eu nunca tinha ouvido falar. 
+
+https://twitter.com/PaulieScanlon/status/1624905433306566656
+
+Decidi então fazer o meu exemplo e ler um pouco mais sobre a propriedade no [MDN](https://developer.mozilla.org/en-US/docs/Web/SVG/Element/animateMotion#example). Basicamente o `animeMotion` diz para um elemento SVG percorrer a totalidade de um outro elemento mencionado. 
+
+O exemplo básico da própria página do MDN mostra assim:
+
+```
+<center>
+<svg viewBox="0 0 200 100" xmlns="http://www.w3.org/2000/svg">
+  <path
+    fill="none"
+    stroke="lightgrey"
+    d="M20,50 C20,-50 180,150 180,50 C180-50 20,150 20,50 z" />
+
+  <circle r="5" fill="red">
+    <animateMotion
+      dur="10s"
+      repeatCount="indefinite"
+      path="M20,50 C20,-50 180,150 180,50 C180-50 20,150 20,50 z" />
+  </circle>
+</svg>
+</center>
+```
+```
+<svg viewBox="0 0 200 100" xmlns="http://www.w3.org/2000/svg">
+  <path
+    fill="none"
+    stroke="lightgrey"
+    d="M20,50 C20,-50 180,150 180,50 C180-50 20,150 20,50 z" />
+
+  <circle r="5" fill="red">
+    <animateMotion
+      dur="10s"
+      repeatCount="indefinite"
+      path="M20,50 C20,-50 180,150 180,50 C180-50 20,150 20,50 z" />
+  </circle>
+</svg>
+```
+Onde o código para isso é bem básico dentro do SVG: Enquanto a primeira forma é um `<path>` a segunda é apenas um `<circle>` contendo dentro de si a instrução animeMotion dizendo para o circulo percorrer o `<path>` anterior com uma animação que dure 10 segundos. A chave que conecta os dois elementos é o atributo path dentro de animeMotion que precisa ser igual ao atributo d dentro de path que são as coordenadas que desenham a forma em questão. 
+
+## Experimentando em uma forma diferente. 
+Quis fazer um desenho diferente, como uma corrida numa pista, então encontrei um SVG do desenho da pista de Interlagos em SP e aproveitei para pegar um outro SVG de carro de corrida.
+
+Como são elementos muito diferentes, baixados em sites diferentes, joguei os dois no Figma e montei o quadro que gostaria com as minhas dimensões. 
+
+Exportei um SVG novo a partir desse desenho e então montei um grupo com 3 carros diferentes incluindo a animateMotion dentro de cada um deles. Adicionei um atributo chamado begin para dar um pequeno "delay" entre o começo da animação de um para outro e o atributo rotate=auto que faz com que o carro "vire" e pronto! 
+
+## Melhorias
+Claro que não está perfeito, longe disso, até porque não conheço muito sobre SVG e realmente queria ver a animação funcionando. Gostaria de conseguir colocar os carros 100% dentro da pista e fazer com que eles não saiam do canvas nas extremidades do desenho. Se alguém souber como fazer isso é só me chamar. 
+
+## Links e referências
+- [Você pode ver o código final no meu gist.](https://gist.github.com/rhamses/9645d935ce111274e63ee79b0557adfd)
+- [Veja o Codepen em funcionamento](https://codepen.io/rhamses/full/poOzQBy)
+- [Sara Drasner é excelente para ensinar sobre SVG](https://www.youtube.com/watch?v=4laPOtTRteI)
