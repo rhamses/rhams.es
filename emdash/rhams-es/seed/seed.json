@@ -1,0 +1,4667 @@
+{
+	"$schema": "https://emdashcms.com/seed.schema.json",
+	"version": "1",
+	"meta": {
+		"name": "Rhamsés Blog",
+		"description": "Artigos sobre engenharia de software e desenvolvimento web",
+		"author": "Rhamses"
+	},
+	"settings": {
+		"title": "Rhamsés Blog",
+		"tagline": "Artigos sobre engenharia de software e desenvolvimento web."
+	},
+	"collections": [
+		{
+			"slug": "posts",
+			"label": "Posts",
+			"labelSingular": "Post",
+			"supports": [
+				"drafts",
+				"revisions",
+				"search",
+				"seo"
+			],
+			"commentsEnabled": true,
+			"fields": [
+				{
+					"slug": "title",
+					"label": "Title",
+					"type": "string",
+					"required": true,
+					"searchable": true
+				},
+				{
+					"slug": "featured_image",
+					"label": "Featured Image",
+					"type": "image"
+				},
+				{
+					"slug": "content",
+					"label": "Content",
+					"type": "portableText",
+					"searchable": true
+				},
+				{
+					"slug": "excerpt",
+					"label": "Excerpt",
+					"type": "text"
+				}
+			]
+		},
+		{
+			"slug": "pages",
+			"label": "Pages",
+			"labelSingular": "Page",
+			"supports": [
+				"drafts",
+				"revisions",
+				"search"
+			],
+			"fields": [
+				{
+					"slug": "title",
+					"label": "Title",
+					"type": "string",
+					"required": true,
+					"searchable": true
+				},
+				{
+					"slug": "content",
+					"label": "Content",
+					"type": "portableText",
+					"searchable": true
+				}
+			]
+		}
+	],
+	"taxonomies": [
+		{
+			"name": "category",
+			"label": "Categories",
+			"labelSingular": "Category",
+			"hierarchical": true,
+			"collections": [
+				"posts"
+			],
+			"terms": [
+				{
+					"slug": "development",
+					"label": "Development"
+				},
+				{
+					"slug": "design",
+					"label": "Design"
+				},
+				{
+					"slug": "notes",
+					"label": "Notes"
+				}
+			]
+		},
+		{
+			"name": "tag",
+			"label": "Tags",
+			"labelSingular": "Tag",
+			"hierarchical": false,
+			"collections": [
+				"posts"
+			],
+			"terms": [
+				{
+					"slug": "webdev",
+					"label": "Web Development"
+				},
+				{
+					"slug": "opinion",
+					"label": "Opinion"
+				},
+				{
+					"slug": "tools",
+					"label": "Tools"
+				},
+				{
+					"slug": "creativity",
+					"label": "Creativity"
+				}
+			]
+		}
+	],
+	"bylines": [
+		{
+			"id": "byline-rhamses",
+			"slug": "rhamses",
+			"displayName": "Rhamses"
+		}
+	],
+	"menus": [
+		{
+			"name": "primary",
+			"label": "Primary Navigation",
+			"items": [
+				{
+					"type": "custom",
+					"label": "Início",
+					"url": "/"
+				},
+				{
+					"type": "custom",
+					"label": "Sobre",
+					"url": "/pages/about"
+				},
+				{
+					"type": "custom",
+					"label": "Posts",
+					"url": "/posts"
+				}
+			],
+			"locale": "pt"
+		},
+		{
+			"name": "primary",
+			"label": "Primary Navigation",
+			"locale": "en",
+			"translationOf": "primary",
+			"items": [
+				{
+					"type": "custom",
+					"label": "Home",
+					"url": "/en/"
+				},
+				{
+					"type": "custom",
+					"label": "About",
+					"url": "/en/pages/about"
+				},
+				{
+					"type": "custom",
+					"label": "Posts",
+					"url": "/en/posts"
+				}
+			]
+		}
+	],
+	"widgetAreas": [
+		{
+			"name": "sidebar",
+			"label": "Sidebar",
+			"description": "Widget area displayed on single post pages",
+			"widgets": [
+				{
+					"type": "component",
+					"componentId": "core:categories",
+					"title": "Categories"
+				},
+				{
+					"type": "component",
+					"componentId": "core:tags",
+					"title": "Tags"
+				}
+			]
+		},
+		{
+			"name": "footer",
+			"label": "Footer",
+			"description": "Widget area displayed in the site footer",
+			"widgets": [
+				{
+					"type": "content",
+					"title": "About",
+					"content": [
+						{
+							"_type": "block",
+							"style": "normal",
+							"children": [
+								{
+									"_type": "span",
+									"text": "Artigos sobre engenharia de software e desenvolvimento web. Por Rhamses.",
+									"_key": "k1"
+								}
+							],
+							"_key": "k0"
+						}
+					]
+				}
+			]
+		}
+	],
+	"sections": [
+		{
+			"slug": "newsletter-signup",
+			"title": "Newsletter Signup",
+			"description": "A call-to-action block for newsletter subscriptions",
+			"keywords": [
+				"newsletter",
+				"subscribe",
+				"email",
+				"cta"
+			],
+			"source": "theme",
+			"content": [
+				{
+					"_type": "block",
+					"style": "h3",
+					"children": [
+						{
+							"_type": "span",
+							"text": "Stay in the loop",
+							"_key": "k1"
+						}
+					],
+					"_key": "k0"
+				},
+				{
+					"_type": "block",
+					"style": "normal",
+					"children": [
+						{
+							"_type": "span",
+							"text": "Get notified when new posts are published. No spam, unsubscribe anytime.",
+							"_key": "k3"
+						}
+					],
+					"_key": "k2"
+				}
+			]
+		},
+		{
+			"slug": "about-author",
+			"title": "About the Author",
+			"description": "Brief author bio for use in posts or pages",
+			"keywords": [
+				"author",
+				"bio",
+				"about"
+			],
+			"source": "theme",
+			"content": [
+				{
+					"_type": "block",
+					"style": "normal",
+					"children": [
+						{
+							"_type": "span",
+							"text": "Rhamses — Web engineer baseado no Brasil. Escreve sobre software, web e o que estiver aprendendo.",
+							"_key": "k1"
+						}
+					],
+					"_key": "k0"
+				}
+			]
+		}
+	],
+	"content": {
+		"pages": [
+			{
+				"id": "about",
+				"slug": "about",
+				"status": "published",
+				"data": {
+					"title": "Sobre",
+					"content": [
+						{
+							"_type": "block",
+							"_key": "kfg",
+							"style": "normal",
+							"markDefs": [],
+							"children": [
+								{
+									"_type": "span",
+									"_key": "kfd",
+									"text": "Olá, eu sou o ",
+									"marks": []
+								},
+								{
+									"_type": "span",
+									"_key": "kfe",
+									"text": "Rhamses",
+									"marks": [
+										"strong"
+									]
+								},
+								{
+									"_type": "span",
+									"_key": "kff",
+									"text": ". Sou um Web engineer baseado no Brasil.",
+									"marks": []
+								}
+							]
+						},
+						{
+							"_type": "block",
+							"_key": "kfr",
+							"style": "normal",
+							"markDefs": [
+								{
+									"_key": "kfi",
+									"_type": "link",
+									"href": "https://www.twitter.com/rhamses"
+								},
+								{
+									"_key": "kfl",
+									"_type": "link",
+									"href": "https://www.github.com/rhamses"
+								},
+								{
+									"_key": "kfo",
+									"_type": "link",
+									"href": "https://rhams.es"
+								}
+							],
+							"children": [
+								{
+									"_type": "span",
+									"_key": "kfh",
+									"text": "Você pode me seguir no ",
+									"marks": []
+								},
+								{
+									"_type": "span",
+									"_key": "kfj",
+									"text": "Twitter",
+									"marks": [
+										"kfi"
+									]
+								},
+								{
+									"_type": "span",
+									"_key": "kfk",
+									"text": ", ver alguns trabalhos no ",
+									"marks": []
+								},
+								{
+									"_type": "span",
+									"_key": "kfm",
+									"text": "GitHub",
+									"marks": [
+										"kfl"
+									]
+								},
+								{
+									"_type": "span",
+									"_key": "kfn",
+									"text": ", ou ler mais sobre mim em ",
+									"marks": []
+								},
+								{
+									"_type": "span",
+									"_key": "kfp",
+									"text": "rhams.es",
+									"marks": [
+										"kfo"
+									]
+								},
+								{
+									"_type": "span",
+									"_key": "kfq",
+									"text": ".",
+									"marks": []
+								}
+							]
+						},
+						{
+							"_type": "block",
+							"_key": "kft",
+							"style": "normal",
+							"markDefs": [],
+							"children": [
+								{
+									"_type": "span",
+									"_key": "kfs",
+									"text": "Este blog reúne anotações e artigos sobre software, web e o que eu estiver aprendendo.",
+									"marks": []
+								}
+							]
+						}
+					]
+				},
+				"locale": "pt"
+			},
+			{
+				"id": "about-en",
+				"slug": "about",
+				"locale": "en",
+				"translationOf": "about",
+				"status": "published",
+				"data": {
+					"title": "About",
+					"content": [
+						{
+							"_type": "block",
+							"style": "normal",
+							"children": [
+								{
+									"_type": "span",
+									"text": "Hi, I'm Rhamses — a Web engineer based in Brazil. You can follow me on Twitter, see some of my work on GitHub, or read more on rhams.es.",
+									"_key": "k1"
+								}
+							],
+							"_key": "k0"
+						},
+						{
+							"_type": "block",
+							"style": "normal",
+							"children": [
+								{
+									"_type": "span",
+									"text": "This blog collects notes and articles about software, the web, and whatever I'm learning.",
+									"_key": "k3"
+								}
+							],
+							"_key": "k2"
+						}
+					]
+				}
+			}
+		],
+		"posts": [
+			{
+				"id": "post-ciencia-de-dados-e-matematica",
+				"slug": "ciencia-de-dados-e-matematica",
+				"status": "published",
+				"publishedAt": "2023-12-07T12:00:00.000Z",
+				"data": {
+					"title": "Ciência de Dados e Matemática",
+					"featured_image": {
+						"$media": {
+							"url": "https://raw.githubusercontent.com/rhamses/blog/main/public/assets/blog/web-components-exemplos-e-overview/capa.webp",
+							"alt": "Ciência de Dados e Matemática",
+							"filename": "capa.webp"
+						}
+					},
+					"content": [
+						{
+							"_type": "block",
+							"_key": "kes",
+							"style": "normal",
+							"markDefs": [],
+							"children": [
+								{
+									"_type": "span",
+									"_key": "ker",
+									"text": "Há muuuitos anos atrás eu decidi que programar seria uma saída natural para a minha profissão de *\"Web Designer\"* que vinha exercendo há quase 3 anos. Como uma forma de pegar mais *freelancer* me envolvi com WordPress e aos poucos fui desbravando o PHP até chegar num nível onde eu conseguia falar que eu era \"programador WordPress\" - Me peça para criar um post customizado, mas não me peça uma classe dedicada para interagir com imagens, por exemplo. E foi assim que pelos últimos 15 anos encarei o mundo programação: Veio Python, frameworks JS, Node.js e com isso muita infraestrutura com Linux, CI/CD etc.",
+									"marks": []
+								}
+							]
+						},
+						{
+							"_type": "block",
+							"_key": "keu",
+							"style": "h2",
+							"markDefs": [],
+							"children": [
+								{
+									"_type": "span",
+									"_key": "ket",
+									"text": "E agora para algo completamente diferente.",
+									"marks": []
+								}
+							]
+						},
+						{
+							"_type": "block",
+							"_key": "kew",
+							"style": "normal",
+							"markDefs": [],
+							"children": [
+								{
+									"_type": "span",
+									"_key": "kev",
+									"text": "Dados sempre foi uma curiosidade minha. Desde pesquisas políticas na TV que falavam da tão famosa \"margem de erro para mais ou para menos\" que me deixava com a pulga atrás da orelha (porque 2 pontos e não 4 ou 6? E porque pra mais ou pra menos? ninguém chegou a uma conclusão?); com a chegada dos infográficos eu fiquei fascinado na criatividade sem limites para ilustrar os mais variados dados, mesmo que ficasse impossível de compreender por conta do layout não convencional.",
+									"marks": []
+								}
+							]
+						},
+						{
+							"_type": "block",
+							"_key": "key",
+							"style": "normal",
+							"markDefs": [],
+							"children": [
+								{
+									"_type": "span",
+									"_key": "kex",
+									"text": "Acompanhando a rápida evolução de *Machine Learning* e AI, somada a tantas outras curiosidades em outros campos como jornalismo, política, esportes e com uma pequena experiência de trabalhar lado a lado com equipes de dados nas empresas por onde passei me parece cada vez mais claro que esse é o meu novo desafio: Ciência de Dados e toda a sua complexidade em volta, por que acontece que a base dessa área de estudo é justamente minha fraqueza: Matemática, e isso muda tudo.",
+									"marks": []
+								}
+							]
+						},
+						{
+							"_type": "block",
+							"_key": "kf0",
+							"style": "h2",
+							"markDefs": [],
+							"children": [
+								{
+									"_type": "span",
+									"_key": "kez",
+									"text": "Como aprender a aprender?",
+									"marks": []
+								}
+							]
+						},
+						{
+							"_type": "block",
+							"_key": "kf2",
+							"style": "normal",
+							"markDefs": [],
+							"children": [
+								{
+									"_type": "span",
+									"_key": "kf1",
+									"text": "Veja bem, eu não tenho dificuldades com essa matéria, eu tenho completo pavor, gatilho mesmo! Nunca vou esquecer que a minha maior nota em geometria na vida foi um 3 de 10 chorado ainda por cima e isso é relevante porque ilustração de problemas é algo muito importante pelo que vejo quando pesquiso assuntos matemáticos.",
+									"marks": []
+								}
+							]
+						},
+						{
+							"_type": "block",
+							"_key": "kf4",
+							"style": "normal",
+							"markDefs": [],
+							"children": [
+								{
+									"_type": "span",
+									"_key": "kf3",
+									"text": "Por isso eu busco toda ajuda que posso pois ao contrário da programação onde ser autodidata é uma habilidade fundamental para se manter em dia com as novidades, na ciência de dados eu preciso da maior quantidade de mentores possível para conseguir entender anos de conhecimento matemático que não faço ideia de como funciona.",
+									"marks": []
+								}
+							]
+						},
+						{
+							"_type": "block",
+							"_key": "kf6",
+							"style": "normal",
+							"markDefs": [],
+							"children": [
+								{
+									"_type": "span",
+									"_key": "kf5",
+									"text": "Atualmente faço um curso de EAD e um curso eletivo sobre Ciência de dados, para elevar meu conhecimento matemático voltei ao zero e estou fazendo as trilhas da Khan Academy sobre o assunto. Na Amazon tenho alguns livros guardados para uma eventual compra enquanto no Youtube a quantidade de vídeos sobre o assunto só aumenta.",
+									"marks": []
+								}
+							]
+						},
+						{
+							"_type": "block",
+							"_key": "kf8",
+							"style": "h2",
+							"markDefs": [],
+							"children": [
+								{
+									"_type": "span",
+									"_key": "kf7",
+									"text": "Prestar conta, porque não?",
+									"marks": []
+								}
+							]
+						},
+						{
+							"_type": "block",
+							"_key": "kfa",
+							"style": "normal",
+							"markDefs": [],
+							"children": [
+								{
+									"_type": "span",
+									"_key": "kf9",
+									"text": "Além disso, uma coisa que sempre funciona é pedir ajuda para amigos para manter a responsabilidade sobre os estudos, é isso que estou fazendo agora aqui, estou pedindo a sua ajuda também para me manter nos trilhos dos estudos e vou usar esse espaço para documentar tudo o que for aprendendo nesta área. ",
+									"marks": []
+								}
+							]
+						},
+						{
+							"_type": "block",
+							"_key": "kfc",
+							"style": "normal",
+							"markDefs": [],
+							"children": [
+								{
+									"_type": "span",
+									"_key": "kfb",
+									"text": "Obrigado e nos vemos em breve. 😄",
+									"marks": []
+								}
+							]
+						}
+					],
+					"excerpt": "Para mim, um desafio muito maior do que aprender a programar."
+				},
+				"bylines": [
+					{
+						"byline": "byline-rhamses"
+					}
+				],
+				"taxonomies": {
+					"category": [
+						"notes"
+					],
+					"tag": [
+						"opinion"
+					]
+				},
+				"locale": "pt"
+			},
+			{
+				"id": "post-cloudflare-service-worker",
+				"slug": "cloudflare-service-worker",
+				"status": "published",
+				"publishedAt": "2023-10-11T12:00:00.000Z",
+				"data": {
+					"title": "Cloudflare Service Worker",
+					"featured_image": {
+						"$media": {
+							"url": "https://raw.githubusercontent.com/rhamses/blog/main/public/assets/blog/web-components-exemplos-e-overview/capa.webp",
+							"alt": "Cloudflare Service Worker",
+							"filename": "capa.webp"
+						}
+					},
+					"content": [
+						{
+							"_type": "block",
+							"_key": "k9o",
+							"style": "normal",
+							"markDefs": [],
+							"children": [
+								{
+									"_type": "span",
+									"_key": "k9l",
+									"text": "Imagina manipular as requisições para o seu site sem precisar ter uma instância de servidor web? Fazer testes A/B, redirecionar tráfego sem precisar editar uma linha de um apache ou Nginx. Essas são só algumas das qualidades da ",
+									"marks": []
+								},
+								{
+									"_type": "span",
+									"_key": "k9m",
+									"text": "edge computing",
+									"marks": [
+										"strong"
+									]
+								},
+								{
+									"_type": "span",
+									"_key": "k9n",
+									"text": ".",
+									"marks": []
+								}
+							]
+						},
+						{
+							"_type": "block",
+							"_key": "k9q",
+							"style": "h2",
+							"markDefs": [],
+							"children": [
+								{
+									"_type": "span",
+									"_key": "k9p",
+									"text": "Edge Computing e Workers",
+									"marks": []
+								}
+							]
+						},
+						{
+							"_type": "block",
+							"_key": "k9v",
+							"style": "normal",
+							"markDefs": [
+								{
+									"_key": "k9s",
+									"_type": "link",
+									"href": "https://blog.cloudflare.com/introducing-cloudflare-workers/"
+								}
+							],
+							"children": [
+								{
+									"_type": "span",
+									"_key": "k9r",
+									"text": "É um termo para classificar scripts que rodam próximo ao cliente que fez a requisição. A ",
+									"marks": []
+								},
+								{
+									"_type": "span",
+									"_key": "k9t",
+									"text": "Cloudflare foi a primeira",
+									"marks": [
+										"k9s"
+									]
+								},
+								{
+									"_type": "span",
+									"_key": "k9u",
+									"text": " empresa que lançou essa nova estratégia lá em 2017 e desde então outras empresas também suportam essa forma de host e desenvolvimento. Os principais ganho dessa estratégias são: ",
+									"marks": []
+								}
+							]
+						},
+						{
+							"_type": "block",
+							"_key": "k9y",
+							"style": "normal",
+							"listItem": "bullet",
+							"level": 1,
+							"markDefs": [],
+							"children": [
+								{
+									"_type": "span",
+									"_key": "k9w",
+									"text": "Performance: por conta das respostas aconterecem perto da geografia do cliente o tempo de carregamento fica abaixo dos ",
+									"marks": []
+								},
+								{
+									"_type": "span",
+									"_key": "k9x",
+									"text": "50ms!!",
+									"marks": [
+										"strong"
+									]
+								}
+							]
+						},
+						{
+							"_type": "block",
+							"_key": "ka1",
+							"style": "normal",
+							"listItem": "bullet",
+							"level": 1,
+							"markDefs": [],
+							"children": [
+								{
+									"_type": "span",
+									"_key": "k9z",
+									"text": "Valor: Existe uma camada gratuita para um Cloudflare Worker que cobre muitos casos de uso, e caso precise pagar, começa em apenas ",
+									"marks": []
+								},
+								{
+									"_type": "span",
+									"_key": "ka0",
+									"text": "5 doláres/mês",
+									"marks": [
+										"strong"
+									]
+								}
+							]
+						},
+						{
+							"_type": "block",
+							"_key": "ka3",
+							"style": "normal",
+							"listItem": "bullet",
+							"level": 1,
+							"markDefs": [],
+							"children": [
+								{
+									"_type": "span",
+									"_key": "ka2",
+									"text": "Facilidade: Tudo que precisa ser feito é saber escrever javascript! E toda manipulação de chamadas de servidor será feita usando a mesma implementação da API de Web Worker que os navegadores já usam, ou seja, sem precisar se preocupar com servidor web nunca mais!",
+									"marks": []
+								}
+							]
+						},
+						{
+							"_type": "block",
+							"_key": "ka5",
+							"style": "h2",
+							"markDefs": [],
+							"children": [
+								{
+									"_type": "span",
+									"_key": "ka4",
+									"text": "Exemplo: Redirecionar subdomínio para rotas. ",
+									"marks": []
+								}
+							]
+						},
+						{
+							"_type": "block",
+							"_key": "kab",
+							"style": "normal",
+							"markDefs": [
+								{
+									"_key": "ka9",
+									"_type": "link",
+									"href": "https://rhams.es/blog"
+								}
+							],
+							"children": [
+								{
+									"_type": "span",
+									"_key": "ka6",
+									"text": "Um bom exemplo personalizado que precisei fazer foi criar a rota deste blog aqui! Originalmente o endereço dele é um subdomínio da Cloudflare ",
+									"marks": []
+								},
+								{
+									"_type": "span",
+									"_key": "ka7",
+									"text": "rhamses-blog.pages.dev",
+									"marks": [
+										"code"
+									]
+								},
+								{
+									"_type": "span",
+									"_key": "ka8",
+									"text": " mas eu queria que fosse acessado via ",
+									"marks": []
+								},
+								{
+									"_type": "span",
+									"_key": "kaa",
+									"text": "**rhams.es/blog**",
+									"marks": [
+										"ka9"
+									]
+								}
+							]
+						},
+						{
+							"_type": "block",
+							"_key": "kad",
+							"style": "h3",
+							"markDefs": [],
+							"children": [
+								{
+									"_type": "span",
+									"_key": "kac",
+									"text": "Criando uma instância do Cloudflare Pages",
+									"marks": []
+								}
+							]
+						},
+						{
+							"_type": "block",
+							"_key": "kai",
+							"style": "normal",
+							"markDefs": [
+								{
+									"_key": "kaf",
+									"_type": "link",
+									"href": "https://netlify.com"
+								}
+							],
+							"children": [
+								{
+									"_type": "span",
+									"_key": "kae",
+									"text": "A primeira etapa que fiz foi criar uma instância no serviço Cloudflare pages. Originalmente o blog estava hospedado na ",
+									"marks": []
+								},
+								{
+									"_type": "span",
+									"_key": "kag",
+									"text": "**netlify.com**",
+									"marks": [
+										"kaf"
+									]
+								},
+								{
+									"_type": "span",
+									"_key": "kah",
+									"text": " mas por motivos de compatibilidade com a minha stack, preferi transferir tudo para a Cloudflare. O processo de criação é praticamente o mesmo, basta linkar com o seu perfil do github, ou subir diretamente os arquivos finais. Quando o processo concluir, terei um subdomínio do site hospedado no Cloudflare.",
+									"marks": []
+								}
+							]
+						},
+						{
+							"_type": "image",
+							"_key": "kaj",
+							"alt": "tela final mostrando o endereço do subdominio criado e as informações do último deploy",
+							"asset": {
+								"url": "https://raw.githubusercontent.com/rhamses/blog/main/public/assets/blog/criando-imagens-dinamicamente-com-sharp-e-nodejs/image1.png"
+							}
+						},
+						{
+							"_type": "block",
+							"_key": "kal",
+							"style": "h3",
+							"markDefs": [],
+							"children": [
+								{
+									"_type": "span",
+									"_key": "kak",
+									"text": "Criando um Service Worker para redirecionamento",
+									"marks": []
+								}
+							]
+						},
+						{
+							"_type": "block",
+							"_key": "kaq",
+							"style": "normal",
+							"markDefs": [
+								{
+									"_key": "kan",
+									"_type": "link",
+									"href": "https://developer.mozilla.org/en-US/docs/Web/API/Web_Workers_API"
+								}
+							],
+							"children": [
+								{
+									"_type": "span",
+									"_key": "kam",
+									"text": "E agora sim chegamos ao ponto da questão! Para criar um service worker tudo o que precisamos fazer é escrever javascript e seguir as convenções da ",
+									"marks": []
+								},
+								{
+									"_type": "span",
+									"_key": "kao",
+									"text": "Web Worker API",
+									"marks": [
+										"kan"
+									]
+								},
+								{
+									"_type": "span",
+									"_key": "kap",
+									"text": ".",
+									"marks": []
+								}
+							]
+						},
+						{
+							"_type": "block",
+							"_key": "kav",
+							"style": "normal",
+							"markDefs": [
+								{
+									"_key": "kas",
+									"_type": "link",
+									"href": "https://raw.githubusercontent.com/rhamses/blog/main/public/assets/blog/cloudflare-service-worker/image2.png"
+								}
+							],
+							"children": [
+								{
+									"_type": "span",
+									"_key": "kar",
+									"text": "!",
+									"marks": []
+								},
+								{
+									"_type": "span",
+									"_key": "kat",
+									"text": "tela para criar um Cloudflare Worker",
+									"marks": [
+										"kas"
+									]
+								},
+								{
+									"_type": "span",
+									"_key": "kau",
+									"text": " ",
+									"marks": []
+								}
+							]
+						},
+						{
+							"_type": "block",
+							"_key": "kax",
+							"style": "normal",
+							"markDefs": [],
+							"children": [
+								{
+									"_type": "span",
+									"_key": "kaw",
+									"text": "Na interface web é possível testar a chamada através do mini navegador no canto direito e inspecionar o seu retorno no console que fica na parte inferior do mesmo lado. ",
+									"marks": []
+								}
+							]
+						},
+						{
+							"_type": "image",
+							"_key": "kay",
+							"alt": "Tela de desenvolvimento web para o web worker",
+							"asset": {
+								"url": "https://raw.githubusercontent.com/rhamses/blog/main/public/assets/blog/cloudflare-service-worker/image3.png"
+							}
+						},
+						{
+							"_type": "block",
+							"_key": "kb3",
+							"style": "normal",
+							"markDefs": [
+								{
+									"_key": "kb0",
+									"_type": "link",
+									"href": "https://gist.github.com/rhamses/ceb7f8f97fed90706fa01f1f001a1409"
+								}
+							],
+							"children": [
+								{
+									"_type": "span",
+									"_key": "kaz",
+									"text": "Para acompanhar o código que escrevi para criar o redirecionamento deste exemplo criei um ",
+									"marks": []
+								},
+								{
+									"_type": "span",
+									"_key": "kb1",
+									"text": "gist com todos os comentários necessários",
+									"marks": [
+										"kb0"
+									]
+								},
+								{
+									"_type": "span",
+									"_key": "kb2",
+									"text": ", mas em resumo o que estamos fazendo é:",
+									"marks": []
+								}
+							]
+						},
+						{
+							"_type": "block",
+							"_key": "kb6",
+							"style": "normal",
+							"listItem": "bullet",
+							"level": 1,
+							"markDefs": [],
+							"children": [
+								{
+									"_type": "span",
+									"_key": "kb4",
+									"text": "Interceptar a requisição do cliente que digitou ",
+									"marks": []
+								},
+								{
+									"_type": "span",
+									"_key": "kb5",
+									"text": "rhams.es/blog",
+									"marks": [
+										"code"
+									]
+								}
+							]
+						},
+						{
+							"_type": "block",
+							"_key": "kb9",
+							"style": "normal",
+							"listItem": "bullet",
+							"level": 1,
+							"markDefs": [],
+							"children": [
+								{
+									"_type": "span",
+									"_key": "kb7",
+									"text": "Alterar a chamada para o domínio original ",
+									"marks": []
+								},
+								{
+									"_type": "span",
+									"_key": "kb8",
+									"text": "rhamses-blog.pages.dev",
+									"marks": [
+										"code"
+									]
+								}
+							]
+						},
+						{
+							"_type": "block",
+							"_key": "kbb",
+							"style": "normal",
+							"listItem": "bullet",
+							"level": 1,
+							"markDefs": [],
+							"children": [
+								{
+									"_type": "span",
+									"_key": "kba",
+									"text": "Montar a página HTML e devolve-la para o cliente.",
+									"marks": []
+								}
+							]
+						},
+						{
+							"_type": "block",
+							"_key": "kbd",
+							"style": "normal",
+							"listItem": "bullet",
+							"level": 1,
+							"markDefs": [],
+							"children": [
+								{
+									"_type": "span",
+									"_key": "kbc",
+									"text": "Tudo isso em menos de 50ms!!!",
+									"marks": []
+								}
+							]
+						},
+						{
+							"_type": "block",
+							"_key": "kbf",
+							"style": "h3",
+							"markDefs": [],
+							"children": [
+								{
+									"_type": "span",
+									"_key": "kbe",
+									"text": "Service Worker criado, e agora?",
+									"marks": []
+								}
+							]
+						},
+						{
+							"_type": "block",
+							"_key": "kbh",
+							"style": "normal",
+							"markDefs": [],
+							"children": [
+								{
+									"_type": "span",
+									"_key": "kbg",
+									"text": "Para completar a configuração é preciso unir o seu domínio com o worker recém criado. Se o domínio já estiver dentro do Cloudflare pode facilitar se o objetivo for associar o worker direto com um domínio ou subdomínio. Neste caso é necessário criar uma regra de redirecionamento que completa este ciclo. ",
+									"marks": []
+								}
+							]
+						},
+						{
+							"_type": "block",
+							"_key": "kbl",
+							"style": "normal",
+							"markDefs": [],
+							"children": [
+								{
+									"_type": "span",
+									"_key": "kbi",
+									"text": "Você pode acessar de duas maneiras: Via ",
+									"marks": []
+								},
+								{
+									"_type": "span",
+									"_key": "kbj",
+									"text": "Workers Routes",
+									"marks": [
+										"strong"
+									]
+								},
+								{
+									"_type": "span",
+									"_key": "kbk",
+									"text": " dentro da página do domínio ",
+									"marks": []
+								}
+							]
+						},
+						{
+							"_type": "image",
+							"_key": "kbm",
+							"alt": "menu de regras dentro da opção routes do web worker",
+							"asset": {
+								"url": "https://raw.githubusercontent.com/rhamses/blog/main/public/assets/blog/cloudflare-service-worker/image4.png"
+							}
+						},
+						{
+							"_type": "block",
+							"_key": "kbq",
+							"style": "normal",
+							"markDefs": [],
+							"children": [
+								{
+									"_type": "span",
+									"_key": "kbn",
+									"text": "ou através do menu ",
+									"marks": []
+								},
+								{
+									"_type": "span",
+									"_key": "kbo",
+									"text": "routes",
+									"marks": [
+										"strong"
+									]
+								},
+								{
+									"_type": "span",
+									"_key": "kbp",
+									"text": " dentro da página do Web Worker que criamos anteriormente.",
+									"marks": []
+								}
+							]
+						},
+						{
+							"_type": "image",
+							"_key": "kbr",
+							"alt": "menu de regras dentro da página do domínio",
+							"asset": {
+								"url": "https://raw.githubusercontent.com/rhamses/blog/main/public/assets/blog/cloudflare-service-worker/image5.png"
+							}
+						},
+						{
+							"_type": "block",
+							"_key": "kbv",
+							"style": "normal",
+							"markDefs": [],
+							"children": [
+								{
+									"_type": "span",
+									"_key": "kbs",
+									"text": "Aqui configuro para que toda a chamada ocorrida, seja http ou https, para ",
+									"marks": []
+								},
+								{
+									"_type": "span",
+									"_key": "kbt",
+									"text": "*rhams.es/blog*",
+									"marks": [
+										"code"
+									]
+								},
+								{
+									"_type": "span",
+									"_key": "kbu",
+									"text": "seja redirecionada para o Worker criado.",
+									"marks": []
+								}
+							]
+						},
+						{
+							"_type": "block",
+							"_key": "kby",
+							"style": "normal",
+							"markDefs": [],
+							"children": [
+								{
+									"_type": "span",
+									"_key": "kbw",
+									"text": " ",
+									"marks": []
+								},
+								{
+									"_type": "span",
+									"_key": "kbx",
+									"text": "Atenção para o wildcard(*) no começo e no final sem barra",
+									"marks": [
+										"strong"
+									]
+								}
+							]
+						},
+						{
+							"_type": "block",
+							"_key": "kc0",
+							"style": "normal",
+							"markDefs": [],
+							"children": [
+								{
+									"_type": "span",
+									"_key": "kbz",
+									"text": "Dessa forma, se tudo foi criado certo, agora todo o acesso do blog poderá ser feito via https://rhams.es/blog e toda a estratégia de SEO, sitemaps funcionam olhando para essa URL em definitivo.",
+									"marks": []
+								}
+							]
+						},
+						{
+							"_type": "block",
+							"_key": "kc2",
+							"style": "h2",
+							"markDefs": [],
+							"children": [
+								{
+									"_type": "span",
+									"_key": "kc1",
+									"text": "Cuidados especiais",
+									"marks": []
+								}
+							]
+						},
+						{
+							"_type": "block",
+							"_key": "kc6",
+							"style": "normal",
+							"listItem": "bullet",
+							"level": 1,
+							"markDefs": [],
+							"children": [
+								{
+									"_type": "span",
+									"_key": "kc3",
+									"text": "Para este tipo de deploy precisei reconfigurar meu blog para rodar abaixo da rota ",
+									"marks": []
+								},
+								{
+									"_type": "span",
+									"_key": "kc4",
+									"text": "/blog",
+									"marks": [
+										"code"
+									]
+								},
+								{
+									"_type": "span",
+									"_key": "kc5",
+									"text": " ao invés da raiz do domínio como estava anteriormente. ",
+									"marks": []
+								}
+							]
+						},
+						{
+							"_type": "block",
+							"_key": "kc8",
+							"style": "normal",
+							"listItem": "bullet",
+							"level": 1,
+							"markDefs": [],
+							"children": [
+								{
+									"_type": "span",
+									"_key": "kc7",
+									"text": "Toda alteração de rotas demora alguns segundos para fazer efeito, então não se assuste se algo não atualizar na hora. ",
+									"marks": []
+								}
+							]
+						},
+						{
+							"_type": "block",
+							"_key": "kca",
+							"style": "normal",
+							"listItem": "bullet",
+							"level": 1,
+							"markDefs": [],
+							"children": [
+								{
+									"_type": "span",
+									"_key": "kc9",
+									"text": "Fique atento as configurações de DNS e sempre use as rotinas pré programadas da Cloudflare para Não ter problemas, principalmente com certificados. ",
+									"marks": []
+								}
+							]
+						},
+						{
+							"_type": "block",
+							"_key": "kcd",
+							"style": "normal",
+							"listItem": "bullet",
+							"level": 1,
+							"markDefs": [
+								{
+									"_key": "kcb",
+									"_type": "link",
+									"href": "https://developers.cloudflare.com/workers/examples/"
+								}
+							],
+							"children": [
+								{
+									"_type": "span",
+									"_key": "kcc",
+									"text": "Veja os exemplos para se inspirar agora!",
+									"marks": [
+										"kcb"
+									]
+								}
+							]
+						}
+					],
+					"excerpt": "Manipule o seu site sem precisar usar backend. Esteja preparado para a programação Edge Computing"
+				},
+				"bylines": [
+					{
+						"byline": "byline-rhamses"
+					}
+				],
+				"taxonomies": {
+					"category": [
+						"development"
+					],
+					"tag": [
+						"webdev",
+						"tools"
+					]
+				},
+				"locale": "pt"
+			},
+			{
+				"id": "post-como-animar-elementos-sem-usar-javascript-e-css",
+				"slug": "como-animar-elementos-sem-usar-javascript-e-css",
+				"status": "published",
+				"publishedAt": "2023-02-13T12:00:00.000Z",
+				"data": {
+					"title": "Como animar elementos sem usar Javascript ( e css!)",
+					"featured_image": {
+						"$media": {
+							"url": "https://raw.githubusercontent.com/rhamses/blog/main/public/assets/blog/web-components-exemplos-e-overview/capa.webp",
+							"alt": "Como animar elementos sem usar Javascript ( e css!)",
+							"filename": "capa.webp"
+						}
+					},
+					"content": [
+						{
+							"_type": "block",
+							"_key": "k64",
+							"style": "normal",
+							"markDefs": [
+								{
+									"_key": "k61",
+									"_type": "link",
+									"href": "https://codepen.io/"
+								}
+							],
+							"children": [
+								{
+									"_type": "span",
+									"_key": "k60",
+									"text": "Às vezes precisamos fazer coisas simples de animação e acabamos recorrendo a saídas mais complicadas como bibliotecas inteiras de javascript ou alguma solução muito rebuscada nos ",
+									"marks": []
+								},
+								{
+									"_type": "span",
+									"_key": "k62",
+									"text": "codepen",
+									"marks": [
+										"k61"
+									]
+								},
+								{
+									"_type": "span",
+									"_key": "k63",
+									"text": " da vida enquanto poderíamos usar apenas SVG.",
+									"marks": []
+								}
+							]
+						},
+						{
+							"_type": "block",
+							"_key": "k6b",
+							"style": "normal",
+							"markDefs": [
+								{
+									"_key": "k65",
+									"_type": "link",
+									"href": "https://pt.wikipedia.org/wiki/SVG"
+								},
+								{
+									"_key": "k68",
+									"_type": "link",
+									"href": "https://lottiefiles.com/animation/svg"
+								}
+							],
+							"children": [
+								{
+									"_type": "span",
+									"_key": "k66",
+									"text": "SVG",
+									"marks": [
+										"k65"
+									]
+								},
+								{
+									"_type": "span",
+									"_key": "k67",
+									"text": " é um mundo a parte da pilha web, embora o uso mais conhecido seja para a aplicação de ícones ela é uma plataforma excelente para fazer desde ",
+									"marks": []
+								},
+								{
+									"_type": "span",
+									"_key": "k69",
+									"text": "animações",
+									"marks": [
+										"k68"
+									]
+								},
+								{
+									"_type": "span",
+									"_key": "k6a",
+									"text": " a transições de páginas. ",
+									"marks": []
+								}
+							]
+						},
+						{
+							"_type": "block",
+							"_key": "k6d",
+							"style": "h2",
+							"markDefs": [],
+							"children": [
+								{
+									"_type": "span",
+									"_key": "k6c",
+									"text": "Inspiração",
+									"marks": []
+								}
+							]
+						},
+						{
+							"_type": "block",
+							"_key": "k6h",
+							"style": "normal",
+							"markDefs": [],
+							"children": [
+								{
+									"_type": "span",
+									"_key": "k6e",
+									"text": "Encontrei esse Tuite aqui mostrando o uso da propriedade ",
+									"marks": []
+								},
+								{
+									"_type": "span",
+									"_key": "k6f",
+									"text": "animateMotionque",
+									"marks": [
+										"code"
+									]
+								},
+								{
+									"_type": "span",
+									"_key": "k6g",
+									"text": " eu nunca tinha ouvido falar. ",
+									"marks": []
+								}
+							]
+						},
+						{
+							"_type": "block",
+							"_key": "k6j",
+							"style": "normal",
+							"markDefs": [],
+							"children": [
+								{
+									"_type": "span",
+									"_key": "k6i",
+									"text": "https://twitter.com/PaulieScanlon/status/1624905433306566656",
+									"marks": []
+								}
+							]
+						},
+						{
+							"_type": "block",
+							"_key": "k6q",
+							"style": "normal",
+							"markDefs": [
+								{
+									"_key": "k6l",
+									"_type": "link",
+									"href": "https://developer.mozilla.org/en-US/docs/Web/SVG/Element/animateMotion#example"
+								}
+							],
+							"children": [
+								{
+									"_type": "span",
+									"_key": "k6k",
+									"text": "Decidi então fazer o meu exemplo e ler um pouco mais sobre a propriedade no ",
+									"marks": []
+								},
+								{
+									"_type": "span",
+									"_key": "k6m",
+									"text": "MDN",
+									"marks": [
+										"k6l"
+									]
+								},
+								{
+									"_type": "span",
+									"_key": "k6n",
+									"text": ". Basicamente o ",
+									"marks": []
+								},
+								{
+									"_type": "span",
+									"_key": "k6o",
+									"text": "animeMotion",
+									"marks": [
+										"code"
+									]
+								},
+								{
+									"_type": "span",
+									"_key": "k6p",
+									"text": " diz para um elemento SVG percorrer a totalidade de um outro elemento mencionado. ",
+									"marks": []
+								}
+							]
+						},
+						{
+							"_type": "block",
+							"_key": "k6s",
+							"style": "normal",
+							"markDefs": [],
+							"children": [
+								{
+									"_type": "span",
+									"_key": "k6r",
+									"text": "O exemplo básico da própria página do MDN mostra assim:",
+									"marks": []
+								}
+							]
+						},
+						{
+							"_type": "code",
+							"_key": "k6t",
+							"code": "\n  \n\n  \n    \n  \n"
+						},
+						{
+							"_type": "code",
+							"_key": "k6u",
+							"code": "\n  \n\n  \n    \n  \n"
+						},
+						{
+							"_type": "block",
+							"_key": "k6z",
+							"style": "normal",
+							"markDefs": [],
+							"children": [
+								{
+									"_type": "span",
+									"_key": "k6v",
+									"text": "Onde o código para isso é bem básico dentro do SVG: Enquanto a primeira forma é um ",
+									"marks": []
+								},
+								{
+									"_type": "span",
+									"_key": "k6w",
+									"text": "` a segunda é apenas um ",
+									"marks": [
+										"code"
+									]
+								},
+								{
+									"_type": "span",
+									"_key": "k6x",
+									"text": " contendo dentro de si a instrução animeMotion dizendo para o circulo percorrer o ",
+									"marks": [
+										"code"
+									]
+								},
+								{
+									"_type": "span",
+									"_key": "k6y",
+									"text": "` anterior com uma animação que dure 10 segundos. A chave que conecta os dois elementos é o atributo path dentro de animeMotion que precisa ser igual ao atributo d dentro de path que são as coordenadas que desenham a forma em questão. ",
+									"marks": []
+								}
+							]
+						},
+						{
+							"_type": "block",
+							"_key": "k71",
+							"style": "h2",
+							"markDefs": [],
+							"children": [
+								{
+									"_type": "span",
+									"_key": "k70",
+									"text": "Experimentando em uma forma diferente. ",
+									"marks": []
+								}
+							]
+						},
+						{
+							"_type": "block",
+							"_key": "k73",
+							"style": "normal",
+							"markDefs": [],
+							"children": [
+								{
+									"_type": "span",
+									"_key": "k72",
+									"text": "Quis fazer um desenho diferente, como uma corrida numa pista, então encontrei um SVG do desenho da pista de Interlagos em SP e aproveitei para pegar um outro SVG de carro de corrida.",
+									"marks": []
+								}
+							]
+						},
+						{
+							"_type": "block",
+							"_key": "k75",
+							"style": "normal",
+							"markDefs": [],
+							"children": [
+								{
+									"_type": "span",
+									"_key": "k74",
+									"text": "Como são elementos muito diferentes, baixados em sites diferentes, joguei os dois no Figma e montei o quadro que gostaria com as minhas dimensões. ",
+									"marks": []
+								}
+							]
+						},
+						{
+							"_type": "block",
+							"_key": "k77",
+							"style": "normal",
+							"markDefs": [],
+							"children": [
+								{
+									"_type": "span",
+									"_key": "k76",
+									"text": "Exportei um SVG novo a partir desse desenho e então montei um grupo com 3 carros diferentes incluindo a animateMotion dentro de cada um deles. Adicionei um atributo chamado begin para dar um pequeno \"delay\" entre o começo da animação de um para outro e o atributo rotate=auto que faz com que o carro \"vire\" e pronto! ",
+									"marks": []
+								}
+							]
+						},
+						{
+							"_type": "block",
+							"_key": "k79",
+							"style": "h2",
+							"markDefs": [],
+							"children": [
+								{
+									"_type": "span",
+									"_key": "k78",
+									"text": "Melhorias",
+									"marks": []
+								}
+							]
+						},
+						{
+							"_type": "block",
+							"_key": "k7b",
+							"style": "normal",
+							"markDefs": [],
+							"children": [
+								{
+									"_type": "span",
+									"_key": "k7a",
+									"text": "Claro que não está perfeito, longe disso, até porque não conheço muito sobre SVG e realmente queria ver a animação funcionando. Gostaria de conseguir colocar os carros 100% dentro da pista e fazer com que eles não saiam do canvas nas extremidades do desenho. Se alguém souber como fazer isso é só me chamar. ",
+									"marks": []
+								}
+							]
+						},
+						{
+							"_type": "block",
+							"_key": "k7d",
+							"style": "h2",
+							"markDefs": [],
+							"children": [
+								{
+									"_type": "span",
+									"_key": "k7c",
+									"text": "Links e referências",
+									"marks": []
+								}
+							]
+						},
+						{
+							"_type": "block",
+							"_key": "k7g",
+							"style": "normal",
+							"listItem": "bullet",
+							"level": 1,
+							"markDefs": [
+								{
+									"_key": "k7e",
+									"_type": "link",
+									"href": "https://gist.github.com/rhamses/9645d935ce111274e63ee79b0557adfd"
+								}
+							],
+							"children": [
+								{
+									"_type": "span",
+									"_key": "k7f",
+									"text": "Você pode ver o código final no meu gist.",
+									"marks": [
+										"k7e"
+									]
+								}
+							]
+						},
+						{
+							"_type": "block",
+							"_key": "k7j",
+							"style": "normal",
+							"listItem": "bullet",
+							"level": 1,
+							"markDefs": [
+								{
+									"_key": "k7h",
+									"_type": "link",
+									"href": "https://codepen.io/rhamses/full/poOzQBy"
+								}
+							],
+							"children": [
+								{
+									"_type": "span",
+									"_key": "k7i",
+									"text": "Veja o Codepen em funcionamento",
+									"marks": [
+										"k7h"
+									]
+								}
+							]
+						},
+						{
+							"_type": "block",
+							"_key": "k7m",
+							"style": "normal",
+							"listItem": "bullet",
+							"level": 1,
+							"markDefs": [
+								{
+									"_key": "k7k",
+									"_type": "link",
+									"href": "https://www.youtube.com/watch?v=4laPOtTRteI"
+								}
+							],
+							"children": [
+								{
+									"_type": "span",
+									"_key": "k7l",
+									"text": "Sara Drasner é excelente para ensinar sobre SVG",
+									"marks": [
+										"k7k"
+									]
+								}
+							]
+						}
+					],
+					"excerpt": "Animações com SVG e animateMotion — sem JavaScript e quase sem CSS."
+				},
+				"bylines": [
+					{
+						"byline": "byline-rhamses"
+					}
+				],
+				"taxonomies": {
+					"category": [
+						"development"
+					],
+					"tag": [
+						"webdev",
+						"creativity"
+					]
+				},
+				"locale": "pt"
+			},
+			{
+				"id": "post-consultando-a-tabela-fipe-via-api",
+				"slug": "consultando-a-tabela-fipe-via-api",
+				"status": "published",
+				"publishedAt": "2023-10-02T12:00:00.000Z",
+				"data": {
+					"title": "Consultando a Tabela Fipe via API.",
+					"featured_image": {
+						"$media": {
+							"url": "https://raw.githubusercontent.com/rhamses/blog/main/public/assets/blog/web-components-exemplos-e-overview/capa.webp",
+							"alt": "Consultando a Tabela Fipe via API.",
+							"filename": "capa.webp"
+						}
+					},
+					"content": [
+						{
+							"_type": "block",
+							"_key": "k7r",
+							"style": "normal",
+							"markDefs": [
+								{
+									"_key": "k7o",
+									"_type": "link",
+									"href": "https://veiculos.fipe.org.br"
+								}
+							],
+							"children": [
+								{
+									"_type": "span",
+									"_key": "k7n",
+									"text": "A ",
+									"marks": []
+								},
+								{
+									"_type": "span",
+									"_key": "k7p",
+									"text": "Tabela Fipe",
+									"marks": [
+										"k7o"
+									]
+								},
+								{
+									"_type": "span",
+									"_key": "k7q",
+									"text": " é um excelente recurso de pesquisa para quem possui, ou para quem pretende adquirir um carro. A iniciativa de padronizar o preço médio de comercialização dos carros novos e usados facilita muito a negociação e, de certa forma, alimenta a precificação de toda uma cadeia de produtos do mercado automotivo. ",
+									"marks": []
+								}
+							]
+						},
+						{
+							"_type": "block",
+							"_key": "k7t",
+							"style": "normal",
+							"markDefs": [],
+							"children": [
+								{
+									"_type": "span",
+									"_key": "k7s",
+									"text": "Por conta disso é um sonho de muita gente ter acesso a esses dados em formato de API para que possa ser inserido dentro de suas próprias aplicações. O problema é que a FIPE (sim, esse é o nome da fundação e não o nome da tabela de preço de carros) não disponibiliza esse dado estruturado para consultas.",
+									"marks": []
+								}
+							]
+						},
+						{
+							"_type": "block",
+							"_key": "k7v",
+							"style": "normal",
+							"markDefs": [],
+							"children": [
+								{
+									"_type": "span",
+									"_key": "k7u",
+									"text": "Pela internet existe algumas iniciativas de transformar esses dados em API, mas todas elas sofrem com a falta de alguma coisa: dados atualizados, performance dos endpoints, dificuldade de configuração e por aí vai...",
+									"marks": []
+								}
+							]
+						},
+						{
+							"_type": "block",
+							"_key": "k7x",
+							"style": "h2",
+							"markDefs": [],
+							"children": [
+								{
+									"_type": "span",
+									"_key": "k7w",
+									"text": "[Entra então a minha ideia => fipe.amb1.io](https://fipe.amb1.io)",
+									"marks": [
+										"strong"
+									]
+								}
+							]
+						},
+						{
+							"_type": "block",
+							"_key": "k80",
+							"style": "normal",
+							"markDefs": [
+								{
+									"_key": "k7y",
+									"_type": "link",
+									"href": "https://raw.githubusercontent.com/rhamses/blog/main/public/assets/blog/consultando-a-tabela-fipe-via-api/fipe-apresentacao.mp4"
+								}
+							],
+							"children": [
+								{
+									"_type": "span",
+									"_key": "k7z",
+									"text": "Assistir vídeo",
+									"marks": [
+										"k7y"
+									]
+								}
+							]
+						},
+						{
+							"_type": "block",
+							"_key": "k82",
+							"style": "h3",
+							"markDefs": [],
+							"children": [
+								{
+									"_type": "span",
+									"_key": "k81",
+									"text": "Como adquirir os dados",
+									"marks": []
+								}
+							]
+						},
+						{
+							"_type": "block",
+							"_key": "k86",
+							"style": "normal",
+							"markDefs": [],
+							"children": [
+								{
+									"_type": "span",
+									"_key": "k83",
+									"text": "A primeira atitude foi ",
+									"marks": []
+								},
+								{
+									"_type": "span",
+									"_key": "k84",
+									"text": "não",
+									"marks": [
+										"strong"
+									]
+								},
+								{
+									"_type": "span",
+									"_key": "k85",
+									"text": " utilizar a estrutura já existente no site da Tabela Fipe. Para isso o processo de scrapping usando python se fez necessário e as informações foram baixadas para uma instância do MongoDB. ",
+									"marks": []
+								}
+							]
+						},
+						{
+							"_type": "block",
+							"_key": "k88",
+							"style": "h3",
+							"markDefs": [],
+							"children": [
+								{
+									"_type": "span",
+									"_key": "k87",
+									"text": "Busca com autocomplete",
+									"marks": []
+								}
+							]
+						},
+						{
+							"_type": "block",
+							"_key": "k8c",
+							"style": "normal",
+							"markDefs": [],
+							"children": [
+								{
+									"_type": "span",
+									"_key": "k89",
+									"text": "O jeito que é apresentado as informações para a busca é muito quadrado e eu achei que precisava ser algo mais orgânico como ",
+									"marks": []
+								},
+								{
+									"_type": "span",
+									"_key": "k8a",
+									"text": "autocomplete",
+									"marks": [
+										"strong"
+									]
+								},
+								{
+									"_type": "span",
+									"_key": "k8b",
+									"text": ". Por isso, ao invés de selecionar passo a passo a marca, modelo e versão do carro, agora é necessário apenas buscar o ano desejado de maneira separada após selecionar o veículo e sua versão.",
+									"marks": []
+								}
+							]
+						},
+						{
+							"_type": "image",
+							"_key": "k8d",
+							"alt": "imagem do mecanismo de busca do site fipe.amb1.io",
+							"asset": {
+								"url": "https://raw.githubusercontent.com/rhamses/blog/main/public/assets/blog/consultando-a-tabela-fipe-via-api/autocomplete.png"
+							}
+						},
+						{
+							"_type": "block",
+							"_key": "k8f",
+							"style": "h3",
+							"markDefs": [],
+							"children": [
+								{
+									"_type": "span",
+									"_key": "k8e",
+									"text": "Lista de valores",
+									"marks": []
+								}
+							]
+						},
+						{
+							"_type": "block",
+							"_key": "k8j",
+							"style": "normal",
+							"markDefs": [],
+							"children": [
+								{
+									"_type": "span",
+									"_key": "k8g",
+									"text": "Para cada veículo encontrado é possível obter todos os valores ",
+									"marks": []
+								},
+								{
+									"_type": "span",
+									"_key": "k8h",
+									"text": "do ano de 2023",
+									"marks": [
+										"strong"
+									]
+								},
+								{
+									"_type": "span",
+									"_key": "k8i",
+									"text": " começando em Janeiro/2023. O site também insere uma porcentagem de valorização/desvalorização relativas ao mês anterior e ao começo do ano para dar uma ideia do estado atual dos preços de cada modelo. ",
+									"marks": []
+								}
+							]
+						},
+						{
+							"_type": "image",
+							"_key": "k8k",
+							"alt": "imagem dos cars de preços dos últimos meses para o veículo citroen c3 1.5 versão exclusive no site fipe.amb1.io",
+							"asset": {
+								"url": "https://raw.githubusercontent.com/rhamses/blog/main/public/assets/blog/consultando-a-tabela-fipe-via-api/precos.png"
+							}
+						},
+						{
+							"_type": "block",
+							"_key": "k8m",
+							"style": "h2",
+							"markDefs": [],
+							"children": [
+								{
+									"_type": "span",
+									"_key": "k8l",
+									"text": "Mas... cadê a API ?",
+									"marks": []
+								}
+							]
+						},
+						{
+							"_type": "block",
+							"_key": "k8o",
+							"style": "normal",
+							"markDefs": [],
+							"children": [
+								{
+									"_type": "span",
+									"_key": "k8n",
+									"text": "O site em questão é uma grande revisão de como um site de busca de valores poderia ser. Por dentro, porém, ele foi construído uma série de endpoints próprios onde é possível consultar individualmente cada entidade do projeto:",
+									"marks": []
+								}
+							]
+						},
+						{
+							"_type": "block",
+							"_key": "k8q",
+							"style": "normal",
+							"listItem": "bullet",
+							"level": 1,
+							"markDefs": [],
+							"children": [
+								{
+									"_type": "span",
+									"_key": "k8p",
+									"text": "Marcas",
+									"marks": []
+								}
+							]
+						},
+						{
+							"_type": "block",
+							"_key": "k8s",
+							"style": "normal",
+							"listItem": "bullet",
+							"level": 1,
+							"markDefs": [],
+							"children": [
+								{
+									"_type": "span",
+									"_key": "k8r",
+									"text": "Modelos",
+									"marks": []
+								}
+							]
+						},
+						{
+							"_type": "block",
+							"_key": "k8u",
+							"style": "normal",
+							"listItem": "bullet",
+							"level": 1,
+							"markDefs": [],
+							"children": [
+								{
+									"_type": "span",
+									"_key": "k8t",
+									"text": "Variações de modelos (c3 Tendance ou Exclusive, por exemplo)",
+									"marks": []
+								}
+							]
+						},
+						{
+							"_type": "block",
+							"_key": "k8w",
+							"style": "normal",
+							"listItem": "bullet",
+							"level": 1,
+							"markDefs": [],
+							"children": [
+								{
+									"_type": "span",
+									"_key": "k8v",
+									"text": "Preço da variação",
+									"marks": []
+								}
+							]
+						},
+						{
+							"_type": "block",
+							"_key": "k8y",
+							"style": "normal",
+							"markDefs": [],
+							"children": [
+								{
+									"_type": "span",
+									"_key": "k8x",
+									"text": "Para ter acesso às consultas, é necessário uma chave de acesso. Por enquanto, é possível pegar a chave do próprio site e explorar as chamadas que são feitas por ele para entender melhor como a API funciona. ",
+									"marks": []
+								}
+							]
+						},
+						{
+							"_type": "block",
+							"_key": "k91",
+							"style": "normal",
+							"markDefs": [
+								{
+									"_key": "k8z",
+									"_type": "link",
+									"href": "https://raw.githubusercontent.com/rhamses/blog/main/public/assets/blog/consultando-a-tabela-fipe-via-api/fipe-novidades.mp4"
+								}
+							],
+							"children": [
+								{
+									"_type": "span",
+									"_key": "k90",
+									"text": "Assistir vídeo",
+									"marks": [
+										"k8z"
+									]
+								}
+							]
+						},
+						{
+							"_type": "block",
+							"_key": "k93",
+							"style": "normal",
+							"markDefs": [],
+							"children": [
+								{
+									"_type": "span",
+									"_key": "k92",
+									"text": "Mas em breve será possível pegar uma chave personalizada por cadastro para obter dados históricos assim como os atuais de maneira automatizada. Para isso, basta se cadastrar ao final do site para receber o meu email avisando das novidades 😄",
+									"marks": []
+								}
+							]
+						},
+						{
+							"_type": "block",
+							"_key": "k95",
+							"style": "h3",
+							"markDefs": [],
+							"children": [
+								{
+									"_type": "span",
+									"_key": "k94",
+									"text": "Stack",
+									"marks": []
+								}
+							]
+						},
+						{
+							"_type": "block",
+							"_key": "k9c",
+							"style": "normal",
+							"listItem": "bullet",
+							"level": 1,
+							"markDefs": [
+								{
+									"_key": "k96",
+									"_type": "link",
+									"href": "http://mongodb.com"
+								},
+								{
+									"_key": "k99",
+									"_type": "link",
+									"href": "https://www.mongodb.com/docs/atlas/app-services/data-api/"
+								}
+							],
+							"children": [
+								{
+									"_type": "span",
+									"_key": "k97",
+									"text": "MongoDB Atlas",
+									"marks": [
+										"k96"
+									]
+								},
+								{
+									"_type": "span",
+									"_key": "k98",
+									"text": " com ",
+									"marks": []
+								},
+								{
+									"_type": "span",
+									"_key": "k9a",
+									"text": "Data API",
+									"marks": [
+										"k99"
+									]
+								},
+								{
+									"_type": "span",
+									"_key": "k9b",
+									"text": " para armazenamento e backend as a service",
+									"marks": []
+								}
+							]
+						},
+						{
+							"_type": "block",
+							"_key": "k9g",
+							"style": "normal",
+							"listItem": "bullet",
+							"level": 1,
+							"markDefs": [
+								{
+									"_key": "k9d",
+									"_type": "link",
+									"href": "https://www.python.org"
+								}
+							],
+							"children": [
+								{
+									"_type": "span",
+									"_key": "k9e",
+									"text": "Python",
+									"marks": [
+										"k9d"
+									]
+								},
+								{
+									"_type": "span",
+									"_key": "k9f",
+									"text": " para scrapper a manipulações em geral",
+									"marks": []
+								}
+							]
+						},
+						{
+							"_type": "block",
+							"_key": "k9k",
+							"style": "normal",
+							"listItem": "bullet",
+							"level": 1,
+							"markDefs": [
+								{
+									"_key": "k9h",
+									"_type": "link",
+									"href": "http://nuxt.com"
+								}
+							],
+							"children": [
+								{
+									"_type": "span",
+									"_key": "k9i",
+									"text": "Nuxt",
+									"marks": [
+										"k9h"
+									]
+								},
+								{
+									"_type": "span",
+									"_key": "k9j",
+									"text": " para interface e gerenciamento de estado",
+									"marks": []
+								}
+							]
+						}
+					],
+					"excerpt": "Uma nova maneira de consultar a Tabela Fipe programaticamente."
+				},
+				"bylines": [
+					{
+						"byline": "byline-rhamses"
+					}
+				],
+				"taxonomies": {
+					"category": [
+						"development"
+					],
+					"tag": [
+						"webdev",
+						"tools"
+					]
+				},
+				"locale": "pt"
+			},
+			{
+				"id": "post-criando-imagens-dinamicamente-com-sharp-e-nodejs",
+				"slug": "criando-imagens-dinamicamente-com-sharp-e-nodejs",
+				"status": "published",
+				"publishedAt": "2022-05-26T12:00:00.000Z",
+				"data": {
+					"title": "Criando imagens dinamicamente com Sharp e Nodejs",
+					"featured_image": {
+						"$media": {
+							"url": "https://raw.githubusercontent.com/rhamses/blog/main/public/assets/blog/web-components-exemplos-e-overview/capa.webp",
+							"alt": "Criando imagens dinamicamente com Sharp e Nodejs",
+							"filename": "capa.webp"
+						}
+					},
+					"content": [
+						{
+							"_type": "block",
+							"_key": "k11",
+							"style": "normal",
+							"markDefs": [
+								{
+									"_key": "ky",
+									"_type": "link",
+									"href": "https://www.npmjs.com/package/sharp"
+								}
+							],
+							"children": [
+								{
+									"_type": "span",
+									"_key": "kx",
+									"text": "O ",
+									"marks": []
+								},
+								{
+									"_type": "span",
+									"_key": "kz",
+									"text": "Sharp",
+									"marks": [
+										"ky"
+									]
+								},
+								{
+									"_type": "span",
+									"_key": "k10",
+									"text": " é um dos pacotes mais famosos dentro do ecossistema do Nodejs, sendo a indicação mais fácil para manipulação, conversão e até mesmo edição de imagens, sendo listado como dependência em vários outros grandes projetos que estendem o uso dessas funcionalidades. Mas uma coisa que pouco se fala é a funcionalidade de criar uma nova imagem do zero com Sharp, é sobre isso que vamos falar. ",
+									"marks": []
+								}
+							]
+						},
+						{
+							"_type": "image",
+							"_key": "k12",
+							"alt": "Essa imagem foi gerada com o Sharp para o projeto @hashflagsbot",
+							"asset": {
+								"url": "https://raw.githubusercontent.com/rhamses/blog/main/public/assets/blog/criando-imagens-dinamicamente-com-sharp-e-nodejs/image1.png"
+							}
+						},
+						{
+							"_type": "block",
+							"_key": "k14",
+							"style": "h2",
+							"markDefs": [],
+							"children": [
+								{
+									"_type": "span",
+									"_key": "k13",
+									"text": "TL;DR",
+									"marks": []
+								}
+							]
+						},
+						{
+							"_type": "block",
+							"_key": "k1c",
+							"style": "normal",
+							"markDefs": [],
+							"children": [
+								{
+									"_type": "span",
+									"_key": "k15",
+									"text": "Para fazer uma imagem parecida com a de baixo você vai precisar fazer diversas chamadas para o método ",
+									"marks": []
+								},
+								{
+									"_type": "span",
+									"_key": "k16",
+									"text": "composite",
+									"marks": [
+										"code"
+									]
+								},
+								{
+									"_type": "span",
+									"_key": "k17",
+									"text": ", como se fosse um sistema de camadas do Photoshop, além de precisar fazer uso de ",
+									"marks": []
+								},
+								{
+									"_type": "span",
+									"_key": "k18",
+									"text": "Buffer",
+									"marks": [
+										"code"
+									]
+								},
+								{
+									"_type": "span",
+									"_key": "k19",
+									"text": " e pacotes ",
+									"marks": []
+								},
+								{
+									"_type": "span",
+									"_key": "k1a",
+									"text": "SVG",
+									"marks": [
+										"code"
+									]
+								},
+								{
+									"_type": "span",
+									"_key": "k1b",
+									"text": " para textos.",
+									"marks": []
+								}
+							]
+						},
+						{
+							"_type": "block",
+							"_key": "k1e",
+							"style": "h2",
+							"markDefs": [],
+							"children": [
+								{
+									"_type": "span",
+									"_key": "k1d",
+									"text": "Criando uma imagem",
+									"marks": []
+								}
+							]
+						},
+						{
+							"_type": "block",
+							"_key": "k1i",
+							"style": "normal",
+							"markDefs": [
+								{
+									"_key": "k1g",
+									"_type": "link",
+									"href": "https://sharp.pixelplumbing.com/api-composite"
+								}
+							],
+							"children": [
+								{
+									"_type": "span",
+									"_key": "k1f",
+									"text": "Nessa primeira etapa vamos focar nesta página da ",
+									"marks": []
+								},
+								{
+									"_type": "span",
+									"_key": "k1h",
+									"text": "documentação oficial do Sharp sobre Compositing",
+									"marks": [
+										"k1g"
+									]
+								}
+							]
+						},
+						{
+							"_type": "block",
+							"_key": "k1k",
+							"style": "normal",
+							"markDefs": [],
+							"children": [
+								{
+									"_type": "span",
+									"_key": "k1j",
+									"text": "Nessa primeira etapa vamos focar nesta página da documentação oficial do Sharp sobre Compositing",
+									"marks": []
+								}
+							]
+						},
+						{
+							"_type": "block",
+							"_key": "k1q",
+							"style": "normal",
+							"markDefs": [],
+							"children": [
+								{
+									"_type": "span",
+									"_key": "k1l",
+									"text": "Parar criar uma nova imagem, basta criar uma instância nova passando alguns parâmetros dentro da chave ",
+									"marks": []
+								},
+								{
+									"_type": "span",
+									"_key": "k1m",
+									"text": "create",
+									"marks": [
+										"code"
+									]
+								},
+								{
+									"_type": "span",
+									"_key": "k1n",
+									"text": ", ao final chamamos o método ",
+									"marks": []
+								},
+								{
+									"_type": "span",
+									"_key": "k1o",
+									"text": ".png()",
+									"marks": [
+										"code"
+									]
+								},
+								{
+									"_type": "span",
+									"_key": "k1p",
+									"text": " para avisar o Sharp que estamos criando uma nova imagem do tipo png.",
+									"marks": []
+								}
+							]
+						},
+						{
+							"_type": "block",
+							"_key": "k1u",
+							"style": "normal",
+							"markDefs": [],
+							"children": [
+								{
+									"_type": "span",
+									"_key": "k1r",
+									"text": "Como resposta recebemos um ",
+									"marks": []
+								},
+								{
+									"_type": "span",
+									"_key": "k1s",
+									"text": "buffer",
+									"marks": [
+										"code"
+									]
+								},
+								{
+									"_type": "span",
+									"_key": "k1t",
+									"text": " contendo essas informações que será alimento para as próximas funções que vamos chamar. ",
+									"marks": []
+								}
+							]
+						},
+						{
+							"_type": "code",
+							"_key": "k1v",
+							"code": " // Criando o objeto de parametros da instância\n  const sharpNewImage = {\n    create: {\n      width: 1200,\n      height: 600,\n      channels: 3,\n      background: {\n        r: 239,\n        g: 246,\n        b: 255,\n      },\n    },\n  };\n  // Criando nova instância. A variavel estará com com Buffer()\n  // contendo essas informações.\n  const newImage = sharp(sharpNewImage).png();"
+						},
+						{
+							"_type": "block",
+							"_key": "k1z",
+							"style": "normal",
+							"markDefs": [],
+							"children": [
+								{
+									"_type": "span",
+									"_key": "k1w",
+									"text": "Onde dentro do ",
+									"marks": []
+								},
+								{
+									"_type": "span",
+									"_key": "k1x",
+									"text": "create",
+									"marks": [
+										"code"
+									]
+								},
+								{
+									"_type": "span",
+									"_key": "k1y",
+									"text": " temos algumas das propriedades abaixo. ",
+									"marks": []
+								}
+							]
+						},
+						{
+							"_type": "block",
+							"_key": "k21",
+							"style": "h3",
+							"markDefs": [],
+							"children": [
+								{
+									"_type": "span",
+									"_key": "k20",
+									"text": "width",
+									"marks": []
+								}
+							]
+						},
+						{
+							"_type": "block",
+							"_key": "k23",
+							"style": "normal",
+							"markDefs": [],
+							"children": [
+								{
+									"_type": "span",
+									"_key": "k22",
+									"text": "É a largura da imagem em pixels (no exemplo configurado para 1200px)",
+									"marks": []
+								}
+							]
+						},
+						{
+							"_type": "block",
+							"_key": "k25",
+							"style": "h3",
+							"markDefs": [],
+							"children": [
+								{
+									"_type": "span",
+									"_key": "k24",
+									"text": "height",
+									"marks": []
+								}
+							]
+						},
+						{
+							"_type": "block",
+							"_key": "k27",
+							"style": "normal",
+							"markDefs": [],
+							"children": [
+								{
+									"_type": "span",
+									"_key": "k26",
+									"text": "É a altura da imagem em pixels (no exemplo configurado para 600)",
+									"marks": []
+								}
+							]
+						},
+						{
+							"_type": "block",
+							"_key": "k29",
+							"style": "h3",
+							"markDefs": [],
+							"children": [
+								{
+									"_type": "span",
+									"_key": "k28",
+									"text": "channels",
+									"marks": []
+								}
+							]
+						},
+						{
+							"_type": "block",
+							"_key": "k2b",
+							"style": "normal",
+							"markDefs": [],
+							"children": [
+								{
+									"_type": "span",
+									"_key": "k2a",
+									"text": "É a quantidade de canais de cores baseado no padrão RGBA (red, green, blue, alpha) onde o último valor é possível de controlar a transparência da imagem como um todo.",
+									"marks": []
+								}
+							]
+						},
+						{
+							"_type": "block",
+							"_key": "k2d",
+							"style": "h3",
+							"markDefs": [],
+							"children": [
+								{
+									"_type": "span",
+									"_key": "k2c",
+									"text": "background",
+									"marks": []
+								}
+							]
+						},
+						{
+							"_type": "block",
+							"_key": "k2f",
+							"style": "normal",
+							"markDefs": [],
+							"children": [
+								{
+									"_type": "span",
+									"_key": "k2e",
+									"text": "É o objeto de cores que recebem o valor numérico de cada cor (0-255) de acordo com a quantidade de canais que foi selecionado anteriormente.",
+									"marks": []
+								}
+							]
+						},
+						{
+							"_type": "block",
+							"_key": "k2h",
+							"style": "h2",
+							"markDefs": [],
+							"children": [
+								{
+									"_type": "span",
+									"_key": "k2g",
+									"text": "Usando composite",
+									"marks": []
+								}
+							]
+						},
+						{
+							"_type": "block",
+							"_key": "k2n",
+							"style": "normal",
+							"markDefs": [],
+							"children": [
+								{
+									"_type": "span",
+									"_key": "k2i",
+									"text": "Agora que temos a imagem base de trabalho como adicionamos elementos \"em cima\" dela? Usando o método ",
+									"marks": []
+								},
+								{
+									"_type": "span",
+									"_key": "k2j",
+									"text": "composite",
+									"marks": [
+										"code"
+									]
+								},
+								{
+									"_type": "span",
+									"_key": "k2k",
+									"text": ". Ele é responsável por \"juntar\" diferentes imagens e devolver o resultado para que possamos continuar o trabalho. Para inserir novas imagens e textos basta chamar o ",
+									"marks": []
+								},
+								{
+									"_type": "span",
+									"_key": "k2l",
+									"text": "composite",
+									"marks": [
+										"code"
+									]
+								},
+								{
+									"_type": "span",
+									"_key": "k2m",
+									"text": " várias vezes na mesma instância que ele fará o resto do trabalho",
+									"marks": []
+								}
+							]
+						},
+						{
+							"_type": "code",
+							"_key": "k2o",
+							"code": "// Criando uma nova \"camada\" com uma imagem \nnewImage.composite({\n  input: 'image.png',\n  top: 200,\n  left: 400,\n});"
+						},
+						{
+							"_type": "block",
+							"_key": "k2t",
+							"style": "normal",
+							"markDefs": [
+								{
+									"_key": "k2q",
+									"_type": "link",
+									"href": "https://sharp.pixelplumbing.com/api-composite#parameters"
+								}
+							],
+							"children": [
+								{
+									"_type": "span",
+									"_key": "k2p",
+									"text": "Onde dentro do composite temos algumas das propriedades abaixo. Existem ainda outras propriedades por isso aconselho a ler a ",
+									"marks": []
+								},
+								{
+									"_type": "span",
+									"_key": "k2r",
+									"text": "documentação com atenção",
+									"marks": [
+										"k2q"
+									]
+								},
+								{
+									"_type": "span",
+									"_key": "k2s",
+									"text": ". Alguns interessantes são blend, animated e raw",
+									"marks": []
+								}
+							]
+						},
+						{
+							"_type": "block",
+							"_key": "k2v",
+							"style": "h3",
+							"markDefs": [],
+							"children": [
+								{
+									"_type": "span",
+									"_key": "k2u",
+									"text": "Input",
+									"marks": []
+								}
+							]
+						},
+						{
+							"_type": "block",
+							"_key": "k2x",
+							"style": "normal",
+							"markDefs": [],
+							"children": [
+								{
+									"_type": "span",
+									"_key": "k2w",
+									"text": "Aqui informamos qual é a imagem que queremos inserir na nossa base. O Sharp aceita até uma instância dele mesmo, ou seja, você pode encadear transformações uma na outra. ",
+									"marks": []
+								}
+							]
+						},
+						{
+							"_type": "block",
+							"_key": "k2z",
+							"style": "h3",
+							"markDefs": [],
+							"children": [
+								{
+									"_type": "span",
+									"_key": "k2y",
+									"text": "Top",
+									"marks": []
+								}
+							]
+						},
+						{
+							"_type": "block",
+							"_key": "k31",
+							"style": "normal",
+							"markDefs": [],
+							"children": [
+								{
+									"_type": "span",
+									"_key": "k30",
+									"text": "é a distância, em pixels, que a nova imagem vai ter tomar de espaço em relação ao topo da imagem base",
+									"marks": []
+								}
+							]
+						},
+						{
+							"_type": "block",
+							"_key": "k33",
+							"style": "h3",
+							"markDefs": [],
+							"children": [
+								{
+									"_type": "span",
+									"_key": "k32",
+									"text": "Left",
+									"marks": []
+								}
+							]
+						},
+						{
+							"_type": "block",
+							"_key": "k35",
+							"style": "normal",
+							"markDefs": [],
+							"children": [
+								{
+									"_type": "span",
+									"_key": "k34",
+									"text": "é a distância, em pixels, que a nova imagem vai ter tomar de espaço em relação a lateral esquerda da imagem base",
+									"marks": []
+								}
+							]
+						},
+						{
+							"_type": "block",
+							"_key": "k37",
+							"style": "h2",
+							"markDefs": [],
+							"children": [
+								{
+									"_type": "span",
+									"_key": "k36",
+									"text": "Adicionando textos",
+									"marks": []
+								}
+							]
+						},
+						{
+							"_type": "block",
+							"_key": "k3j",
+							"style": "normal",
+							"markDefs": [],
+							"children": [
+								{
+									"_type": "span",
+									"_key": "k38",
+									"text": "Aqui é que mora o segredo já que o Sharp suporta alguns tipos de imagem como: ",
+									"marks": []
+								},
+								{
+									"_type": "span",
+									"_key": "k39",
+									"text": "jpeg",
+									"marks": [
+										"code"
+									]
+								},
+								{
+									"_type": "span",
+									"_key": "k3a",
+									"text": ", ",
+									"marks": []
+								},
+								{
+									"_type": "span",
+									"_key": "k3b",
+									"text": "png",
+									"marks": [
+										"code"
+									]
+								},
+								{
+									"_type": "span",
+									"_key": "k3c",
+									"text": ", ",
+									"marks": []
+								},
+								{
+									"_type": "span",
+									"_key": "k3d",
+									"text": "webp",
+									"marks": [
+										"code"
+									]
+								},
+								{
+									"_type": "span",
+									"_key": "k3e",
+									"text": ", ",
+									"marks": []
+								},
+								{
+									"_type": "span",
+									"_key": "k3f",
+									"text": "gif",
+									"marks": [
+										"code"
+									]
+								},
+								{
+									"_type": "span",
+									"_key": "k3g",
+									"text": ", ",
+									"marks": []
+								},
+								{
+									"_type": "span",
+									"_key": "k3h",
+									"text": "svg",
+									"marks": [
+										"code"
+									]
+								},
+								{
+									"_type": "span",
+									"_key": "k3i",
+									"text": " é possível criar textos em svg e inseri-los dentro da imagem Base tudo via código. ",
+									"marks": []
+								}
+							]
+						},
+						{
+							"_type": "block",
+							"_key": "k3o",
+							"style": "normal",
+							"markDefs": [
+								{
+									"_key": "k3l",
+									"_type": "link",
+									"href": "https://www.npmjs.com/package/text-to-svg"
+								}
+							],
+							"children": [
+								{
+									"_type": "span",
+									"_key": "k3k",
+									"text": "xiste uma infinidade de pacotes para criar textos em SVG no Node, mas para o exemplo abaixo vou utilizar o ",
+									"marks": []
+								},
+								{
+									"_type": "span",
+									"_key": "k3m",
+									"text": "text-to-svg",
+									"marks": [
+										"k3l"
+									]
+								},
+								{
+									"_type": "span",
+									"_key": "k3n",
+									"text": " que ajuda a transformar o texto em vetor, o que faz toda a diferença para a consistência do conteúdo que queremos inserir.",
+									"marks": []
+								}
+							]
+						},
+						{
+							"_type": "code",
+							"_key": "k3p",
+							"code": "const TextToSVG = require('text-to-svg');\nconst textToSVG = TextToSVG.loadSync();\n \nconst attributes = {fill: 'red', stroke: 'black'};\nconst options = {x: 0, y: 0, fontSize: 72, anchor: 'top', attributes: attributes};\n \nconst svg = textToSVG.getSVG('Hello World', options); "
+						},
+						{
+							"_type": "block",
+							"_key": "k3r",
+							"style": "normal",
+							"markDefs": [],
+							"children": [
+								{
+									"_type": "span",
+									"_key": "k3q",
+									"text": "Com o SVG devidamente criado é hora de preparar ele para o Sharp. ",
+									"marks": []
+								}
+							]
+						},
+						{
+							"_type": "code",
+							"_key": "k3s",
+							"code": "// Image SVG criada\nconst svg = textToSVG.getSVG('Hello World', options); \n\n// Transformamos o SVG em Buffer para que o Sharp consiga enxergar\nconst SvgText = Buffer.from(svg);\n\n// Criando uma nova \"camada\" dessa vez com o texto.  \nnewImage.composite({\n  input: SvgText,\n  top: 300,\n  left: 500,\n});"
+						},
+						{
+							"_type": "block",
+							"_key": "k3u",
+							"style": "h2",
+							"markDefs": [],
+							"children": [
+								{
+									"_type": "span",
+									"_key": "k3t",
+									"text": "Renderizando a nova imagem",
+									"marks": []
+								}
+							]
+						},
+						{
+							"_type": "block",
+							"_key": "k3w",
+							"style": "normal",
+							"markDefs": [],
+							"children": [
+								{
+									"_type": "span",
+									"_key": "k3v",
+									"text": "Com a nossa nova imagem feita inteiramente via código está na horar de exportar ela para algum lugar. O Sharp possui alguns métodos de saída diferentes, são eles:",
+									"marks": []
+								}
+							]
+						},
+						{
+							"_type": "block",
+							"_key": "k3y",
+							"style": "h3",
+							"markDefs": [],
+							"children": [
+								{
+									"_type": "span",
+									"_key": "k3x",
+									"text": ".toBuffer",
+									"marks": []
+								}
+							]
+						},
+						{
+							"_type": "block",
+							"_key": "k42",
+							"style": "normal",
+							"markDefs": [],
+							"children": [
+								{
+									"_type": "span",
+									"_key": "k3z",
+									"text": "Você pode exportar a nova imagem para um buffer do Node e assim trabalhar com ele em ",
+									"marks": []
+								},
+								{
+									"_type": "span",
+									"_key": "k40",
+									"text": "base64",
+									"marks": [
+										"code"
+									]
+								},
+								{
+									"_type": "span",
+									"_key": "k41",
+									"text": " ou converter para string em outro determinado momento. Para fazer isso basta usar o código abaixo. ",
+									"marks": []
+								}
+							]
+						},
+						{
+							"_type": "code",
+							"_key": "k43",
+							"code": "newImage.toBuffer((err, data, info) => {\n  if (err) console.log(err);\n  console.log(\"Buffer da imagem\", data)\n  console.log(\"Metadados da imagem\", info)\n});"
+						},
+						{
+							"_type": "block",
+							"_key": "k45",
+							"style": "h3",
+							"markDefs": [],
+							"children": [
+								{
+									"_type": "span",
+									"_key": "k44",
+									"text": ".toFile",
+									"marks": []
+								}
+							]
+						},
+						{
+							"_type": "block",
+							"_key": "k4a",
+							"style": "normal",
+							"markDefs": [],
+							"children": [
+								{
+									"_type": "span",
+									"_key": "k46",
+									"text": "É possível exportar a imagem diretamente para uma pasta do sistema desde que usado um caminho válido. O primeiro parâmetro é o caminho + o nome da imagem seguindo o caminho absoluto do sistema, por isso se for salvar em uma pasta separada da pasta que reside o script usar os pacotes ",
+									"marks": []
+								},
+								{
+									"_type": "span",
+									"_key": "k47",
+									"text": "path",
+									"marks": [
+										"code"
+									]
+								},
+								{
+									"_type": "span",
+									"_key": "k48",
+									"text": " e ",
+									"marks": []
+								},
+								{
+									"_type": "span",
+									"_key": "k49",
+									"text": "fs",
+									"marks": [
+										"code"
+									]
+								}
+							]
+						},
+						{
+							"_type": "code",
+							"_key": "k4b",
+							"code": "newImage.toFile('caminho-da-imagem.png',(err) => {\n  if (err) console.log(err);\n});"
+						},
+						{
+							"_type": "block",
+							"_key": "k4d",
+							"style": "h2",
+							"markDefs": [],
+							"children": [
+								{
+									"_type": "span",
+									"_key": "k4c",
+									"text": "Live Demo",
+									"marks": []
+								}
+							]
+						},
+						{
+							"_type": "block",
+							"_key": "k4g",
+							"style": "normal",
+							"markDefs": [
+								{
+									"_key": "k4e",
+									"_type": "link",
+									"href": "https://codesandbox.io/embed/sharpjs-example-l755gs?fontsize=14&hidenavigation=1&theme=dark"
+								}
+							],
+							"children": [
+								{
+									"_type": "span",
+									"_key": "k4f",
+									"text": "Uma demonstração pode ser vista aqui.",
+									"marks": [
+										"k4e"
+									]
+								}
+							]
+						},
+						{
+							"_type": "block",
+							"_key": "k4j",
+							"style": "normal",
+							"markDefs": [
+								{
+									"_key": "k4h",
+									"_type": "link",
+									"href": "https://codesandbox.io/embed/sharpjs-example-l755gs?fontsize=14&hidenavigation=1&theme=dark"
+								}
+							],
+							"children": [
+								{
+									"_type": "span",
+									"_key": "k4i",
+									"text": "Abrir demo",
+									"marks": [
+										"k4h"
+									]
+								}
+							]
+						}
+					],
+					"excerpt": "Fazendo imagens dinamicamente usando para o Nodejs"
+				},
+				"bylines": [
+					{
+						"byline": "byline-rhamses"
+					}
+				],
+				"taxonomies": {
+					"category": [
+						"development"
+					],
+					"tag": [
+						"webdev",
+						"tools"
+					]
+				},
+				"locale": "pt"
+			},
+			{
+				"id": "post-hello-world",
+				"slug": "hello-world",
+				"status": "published",
+				"publishedAt": "2021-01-08T12:00:00.000Z",
+				"data": {
+					"title": "Hello world! 👋",
+					"featured_image": {
+						"$media": {
+							"url": "https://raw.githubusercontent.com/rhamses/blog/main/public/assets/blog/hello-world.jpeg",
+							"alt": "Hello world! 👋",
+							"filename": "hello-world.jpeg"
+						}
+					},
+					"content": [
+						{
+							"_type": "image",
+							"_key": "k0",
+							"alt": "Illustration of woman using a meditation app",
+							"asset": {
+								"url": "https://raw.githubusercontent.com/rhamses/blog/main/public/assets/blog/hello-world.jpeg"
+							}
+						},
+						{
+							"_type": "block",
+							"_key": "k2",
+							"style": "h2",
+							"markDefs": [],
+							"children": [
+								{
+									"_type": "span",
+									"_key": "k1",
+									"text": "Ano novo, ideia velha",
+									"marks": []
+								}
+							]
+						},
+						{
+							"_type": "block",
+							"_key": "k6",
+							"style": "normal",
+							"markDefs": [
+								{
+									"_key": "k4",
+									"_type": "link",
+									"href": "https://gerabandeira.netlify.app/"
+								}
+							],
+							"children": [
+								{
+									"_type": "span",
+									"_key": "k3",
+									"text": "Há um ano atrás, juntei toda a minha coragem e decidi postar no twitter algumas das minhas ideias que estavam na gaveta temendo que a \"polícia do código\" fosse destacar cada erro de cada um desses projetos, mas para minha surpresa só recebi elogios de cada uma das iniciativas, com algumas até conseguindo um certo alcance como essa aqui que é um ",
+									"marks": []
+								},
+								{
+									"_type": "span",
+									"_key": "k5",
+									"text": "gerador de lema da nossa bandeira",
+									"marks": [
+										"k4"
+									]
+								}
+							]
+						},
+						{
+							"_type": "block",
+							"_key": "k8",
+							"style": "normal",
+							"markDefs": [],
+							"children": [
+								{
+									"_type": "span",
+									"_key": "k7",
+									"text": "https://twitter.com/Rhamses/status/1214535685241278464",
+									"marks": []
+								}
+							]
+						},
+						{
+							"_type": "block",
+							"_key": "ka",
+							"style": "normal",
+							"markDefs": [],
+							"children": [
+								{
+									"_type": "span",
+									"_key": "k9",
+									"text": "Então pra esse ano eu resolvi tirar um dos mais enterrados dos projetos: Este blog aqui.",
+									"marks": []
+								}
+							]
+						},
+						{
+							"_type": "block",
+							"_key": "kc",
+							"style": "h2",
+							"markDefs": [],
+							"children": [
+								{
+									"_type": "span",
+									"_key": "kb",
+									"text": "Metas 2020...2021?!",
+									"marks": []
+								}
+							]
+						},
+						{
+							"_type": "block",
+							"_key": "kg",
+							"style": "normal",
+							"markDefs": [],
+							"children": [
+								{
+									"_type": "span",
+									"_key": "kd",
+									"text": "Na verdade, este espaço aqui nasceu ao mesmo tempo que o tuite anterior, mas como é padrão, ao invés de escolher uma ferramenta de mercado para agilizar a entrega, resolvi ",
+									"marks": []
+								},
+								{
+									"_type": "span",
+									"_key": "ke",
+									"text": "super",
+									"marks": [
+										"strong"
+									]
+								},
+								{
+									"_type": "span",
+									"_key": "kf",
+									"text": " complicar a engenharia por trás como se fosse uma estrutura da Amazon para no final terminar com algo bem mais básico do que imaginei.",
+									"marks": []
+								}
+							]
+						},
+						{
+							"_type": "block",
+							"_key": "ki",
+							"style": "normal",
+							"markDefs": [],
+							"children": [
+								{
+									"_type": "span",
+									"_key": "kh",
+									"text": "A principal motivação para conseguir dar esse passo (e espero que para mantê-lo também) foi o fato que em 2020 o tempo na frente do pc programando diminuiu muito, enquanto meu tempo em reuniões e em planejamento aumentou consideravelmente, o que me fez ficar até ansioso porque é necessário ficar atualizado quando você precisa conversar com várias equipes de diferentes niveis de conhecimento diariamente.",
+									"marks": []
+								}
+							]
+						},
+						{
+							"_type": "block",
+							"_key": "kk",
+							"style": "normal",
+							"markDefs": [],
+							"children": [
+								{
+									"_type": "span",
+									"_key": "kj",
+									"text": "Reservando aquela uma horinha por dia para escrever aqui, pretendo documentar o que aprendo sobre:",
+									"marks": []
+								}
+							]
+						},
+						{
+							"_type": "block",
+							"_key": "km",
+							"style": "normal",
+							"listItem": "bullet",
+							"level": 1,
+							"markDefs": [],
+							"children": [
+								{
+									"_type": "span",
+									"_key": "kl",
+									"text": "Vuejs",
+									"marks": []
+								}
+							]
+						},
+						{
+							"_type": "block",
+							"_key": "ko",
+							"style": "normal",
+							"listItem": "bullet",
+							"level": 2,
+							"markDefs": [],
+							"children": [
+								{
+									"_type": "span",
+									"_key": "kn",
+									"text": "WordPress (e as integrações JAMstack com o a API Rest e GraphQl tbm)",
+									"marks": []
+								}
+							]
+						},
+						{
+							"_type": "block",
+							"_key": "kq",
+							"style": "normal",
+							"listItem": "bullet",
+							"level": 2,
+							"markDefs": [],
+							"children": [
+								{
+									"_type": "span",
+									"_key": "kp",
+									"text": "MongoDB / Neo4J / ElasticSearch (porque acabei de conhecer e já considero pacas demais!)",
+									"marks": []
+								}
+							]
+						},
+						{
+							"_type": "block",
+							"_key": "ku",
+							"style": "normal",
+							"listItem": "bullet",
+							"level": 2,
+							"markDefs": [
+								{
+									"_key": "ks",
+									"_type": "link",
+									"href": "https://github.com/rhamses/blog/"
+								}
+							],
+							"children": [
+								{
+									"_type": "span",
+									"_key": "kr",
+									"text": "Além de muitos updates no projeto deste blog no ",
+									"marks": []
+								},
+								{
+									"_type": "span",
+									"_key": "kt",
+									"text": "Github",
+									"marks": [
+										"ks"
+									]
+								}
+							]
+						},
+						{
+							"_type": "block",
+							"_key": "kw",
+							"style": "normal",
+							"listItem": "bullet",
+							"level": 2,
+							"markDefs": [],
+							"children": [
+								{
+									"_type": "span",
+									"_key": "kv",
+									"text": "E o que mais pintar na cabeça",
+									"marks": []
+								}
+							]
+						}
+					],
+					"excerpt": "Todo blog começa com um post. Este é aquele momento."
+				},
+				"bylines": [
+					{
+						"byline": "byline-rhamses"
+					}
+				],
+				"taxonomies": {
+					"category": [
+						"notes"
+					],
+					"tag": [
+						"opinion"
+					]
+				},
+				"locale": "pt"
+			},
+			{
+				"id": "post-identificando-idiomas-atraves-do-javascript",
+				"slug": "identificando-idiomas-atraves-do-javascript",
+				"status": "published",
+				"publishedAt": "2022-06-06T12:00:00.000Z",
+				"data": {
+					"title": "IDENTIFICANDO IDIOMAS ATRAVÉS DO JAVASCRIPT",
+					"featured_image": {
+						"$media": {
+							"url": "https://raw.githubusercontent.com/rhamses/blog/main/public/assets/blog/web-components-exemplos-e-overview/capa.webp",
+							"alt": "IDENTIFICANDO IDIOMAS ATRAVÉS DO JAVASCRIPT",
+							"filename": "capa.webp"
+						}
+					},
+					"content": [
+						{
+							"_type": "block",
+							"_key": "k4l",
+							"style": "normal",
+							"markDefs": [],
+							"children": [
+								{
+									"_type": "span",
+									"_key": "k4k",
+									"text": "Trabalhar com múltiplos idiomas é o principal caminho para entrar no mundo Unicode, mas não é o único já que os emojis só são possíveis graças a essa normalização. Conseguir identificar e trabalhar com Unicode é uma tarefa que parece complicada, mas pelo menos em JS, não é.",
+									"marks": []
+								}
+							]
+						},
+						{
+							"_type": "block",
+							"_key": "k4n",
+							"style": "h2",
+							"markDefs": [],
+							"children": [
+								{
+									"_type": "span",
+									"_key": "k4m",
+									"text": "Porque Unicode",
+									"marks": []
+								}
+							]
+						},
+						{
+							"_type": "block",
+							"_key": "k4p",
+							"style": "normal",
+							"markDefs": [],
+							"children": [
+								{
+									"_type": "span",
+									"_key": "k4o",
+									"text": "Sem Unicode até escrever HTML seria impossível porque é a base de qualquer enconding, sem isso jamais teríamos a tag `` que é responsável para avisar o navegador como renderizar determinados caracteres especiais.",
+									"marks": []
+								}
+							]
+						},
+						{
+							"_type": "block",
+							"_key": "k4r",
+							"style": "normal",
+							"markDefs": [],
+							"children": [
+								{
+									"_type": "span",
+									"_key": "k4q",
+									"text": "https://www.youtube.com/watch?v=-n2nlPHEMG8",
+									"marks": []
+								}
+							]
+						},
+						{
+							"_type": "block",
+							"_key": "k4t",
+							"style": "h2",
+							"markDefs": [],
+							"children": [
+								{
+									"_type": "span",
+									"_key": "k4s",
+									"text": "Usando Unicode no Javascript",
+									"marks": []
+								}
+							]
+						},
+						{
+							"_type": "block",
+							"_key": "k50",
+							"style": "normal",
+							"markDefs": [
+								{
+									"_key": "k4x",
+									"_type": "link",
+									"href": "https://www.unicode.org/charts/"
+								}
+							],
+							"children": [
+								{
+									"_type": "span",
+									"_key": "k4u",
+									"text": "Para usar Unicode no Javascript basta usar o padrão ",
+									"marks": []
+								},
+								{
+									"_type": "span",
+									"_key": "k4v",
+									"text": "\\u0000",
+									"marks": [
+										"code"
+									]
+								},
+								{
+									"_type": "span",
+									"_key": "k4w",
+									"text": " onde o número é o código do símbolo dentro do padrão Unicode como. É possível consultar a lista com todos os ",
+									"marks": []
+								},
+								{
+									"_type": "span",
+									"_key": "k4y",
+									"text": "caracteres suportados",
+									"marks": [
+										"k4x"
+									]
+								},
+								{
+									"_type": "span",
+									"_key": "k4z",
+									"text": " pelo Unicode aqui. ",
+									"marks": []
+								}
+							]
+						},
+						{
+							"_type": "code",
+							"_key": "k51",
+							"code": "const A = \"\\u0100\" // \"Ā\""
+						},
+						{
+							"_type": "block",
+							"_key": "k53",
+							"style": "h2",
+							"markDefs": [],
+							"children": [
+								{
+									"_type": "span",
+									"_key": "k52",
+									"text": "Identificando idiomas",
+									"marks": []
+								}
+							]
+						},
+						{
+							"_type": "block",
+							"_key": "k58",
+							"style": "normal",
+							"markDefs": [
+								{
+									"_key": "k55",
+									"_type": "link",
+									"href": "https://en.wikipedia.org/wiki/Unicode_block"
+								}
+							],
+							"children": [
+								{
+									"_type": "span",
+									"_key": "k54",
+									"text": "Todos os símbolos do ",
+									"marks": []
+								},
+								{
+									"_type": "span",
+									"_key": "k56",
+									"text": "Unicode são alocados em blocos de contexto",
+									"marks": [
+										"k55"
+									]
+								},
+								{
+									"_type": "span",
+									"_key": "k57",
+									"text": " o que nos dá uma facilidade para testar idiomas contra cada um desses blocos de maneira fácil.  Mas atenção: A separação de blocos é por contexto e não idioma o que nos obriga a testar determinado texto em mais de um bloco se quisermos de fato entender a qual idioma ele pertence.",
+									"marks": []
+								}
+							]
+						},
+						{
+							"_type": "block",
+							"_key": "k5a",
+							"style": "normal",
+							"markDefs": [],
+							"children": [
+								{
+									"_type": "span",
+									"_key": "k59",
+									"text": "No exemplo abaixo existem 2 blocos diferentes que serviriam para o mesmo \"idioma\" (Coreano) que na realidade possui dentro de sí dois conjuntos diferentes de caracteres (Hanguls e CJK), assim como para identificar o idioma \"Japonês\" também existem pelo menos 2 blocos (Hiragana e Katana) diferentes.",
+									"marks": []
+								}
+							]
+						},
+						{
+							"_type": "code",
+							"_key": "k5b",
+							"code": "/* \n  Veja o GIST em \n  https://gist.github.com/rhamses/584861ba94b2fbe72f66078efe6df31e\n*/\n\nconst ArabicBlock = new RegExp('[\\u0621-\\u064A]','g')\nconst ThaiBlock = new RegExp('[\\u0E00-\\u0E7F]','g')\nconst HangulBlock = new RegExp('[\\uAC00-\\uD7AF]','g')\nconst CJKBlock = new RegExp('[\\u3000-\\u303F]', 'g')\nconst HiraganaBlock = new RegExp('[\\u3040-\\u309F ]','g')\nconst KatanaBlock = new RegExp('[\\u30A0-\\u30FF ]','g')\n\nfunction identifyLanguage(text) {\n  let result\n  if (text.match(ArabicBlock)) {\n    result = ['ArabicBlock', text.match(ArabicBlock)];\n    \n  } else if (text.match(ThaiBlock)) {\n    result = ['ThaiBlock', text.match(ThaiBlock)];\n    \n  } else if (text.match(HangulBlock)) {\n    result = ['HangulBlock', text.match(HangulBlock)];\n    \n  } else if (text.match(KatanaBlock)) {\n    result = ['KatanaBlock', text.match(KatanaBlock)];\n    \n  } else if (text.match(HiraganaBlock)) {\n    result = ['HiraganaBlock', text.match(HiraganaBlock)];\n    \n  } else if (text.match(CJKBlock)) {\n    result = ['CJKBlock', text.match(CJKBlock)];\n    \n  } else {\n    result = \"Unicode not found\";\n  }\n  return result\n}\n\n// const text = \"کمالہ_خان\";\nconst text = \"ยิ่งปัดยิ่งพุ่ง\";\n// const text = \"끝없이서로의가능성을믿다\";\n// const text = \"オリエント・アルカディア\";\n\nconsole.log(identifyLanguage(text))"
+						},
+						{
+							"_type": "block",
+							"_key": "k5d",
+							"style": "h2",
+							"markDefs": [],
+							"children": [
+								{
+									"_type": "span",
+									"_key": "k5c",
+									"text": "Aplicações práticas",
+									"marks": []
+								}
+							]
+						},
+						{
+							"_type": "block",
+							"_key": "k5f",
+							"style": "normal",
+							"markDefs": [],
+							"children": [
+								{
+									"_type": "span",
+									"_key": "k5e",
+									"text": "Uma das aplicações dessa localização é conseguir atribuir uma fonte específica para cada linguagem já que é muito difícil achar uma única fonte que suporte todos os idiomas do mundo (ainda mais gratuita). ",
+									"marks": []
+								}
+							]
+						},
+						{
+							"_type": "block",
+							"_key": "k5l",
+							"style": "normal",
+							"markDefs": [],
+							"children": [
+								{
+									"_type": "span",
+									"_key": "k5g",
+									"text": "Uma forma de testar isso é navegar no Google Fonts é possível fazer busca de fontes que suportes idiomas específicos. No exemplo abaixo comparei o suporte a um texto árabe com a ",
+									"marks": []
+								},
+								{
+									"_type": "span",
+									"_key": "k5h",
+									"text": "Roboto",
+									"marks": [
+										"strong"
+									]
+								},
+								{
+									"_type": "span",
+									"_key": "k5i",
+									"text": " e a fonte específica ",
+									"marks": []
+								},
+								{
+									"_type": "span",
+									"_key": "k5j",
+									"text": "Almarai",
+									"marks": [
+										"strong"
+									]
+								},
+								{
+									"_type": "span",
+									"_key": "k5k",
+									"text": " que suporta além dos caracteres latinos, também caracteres árabes e que foi a minha escolha dar suporte aos textos árabes dentro do projeto Hashflags Bot.",
+									"marks": []
+								}
+							]
+						},
+						{
+							"_type": "image",
+							"_key": "k5m",
+							"alt": "Imagem ilustrando o suporte a caracteres árabes com a fonte Roboto do Google Fonts",
+							"asset": {
+								"url": "https://raw.githubusercontent.com/rhamses/blog/main/public/assets/blog/identificando-idiomas-atraves-do-javascript/image2.webp"
+							}
+						},
+						{
+							"_type": "image",
+							"_key": "k5n",
+							"alt": "Imagem ilustrando o suporte a caracteres árabes com a fonte Almarai do Google Fonts",
+							"asset": {
+								"url": "https://raw.githubusercontent.com/rhamses/blog/main/public/assets/blog/identificando-idiomas-atraves-do-javascript/image1.webp"
+							}
+						},
+						{
+							"_type": "image",
+							"_key": "k5o",
+							"alt": "Imagem ilustrando a fonte Almarai do Google Fonts em uso no projeto @hashflagsbot",
+							"asset": {
+								"url": "https://raw.githubusercontent.com/rhamses/blog/main/public/assets/blog/identificando-idiomas-atraves-do-javascript/image.webp"
+							}
+						},
+						{
+							"_type": "block",
+							"_key": "k5q",
+							"style": "h2",
+							"markDefs": [],
+							"children": [
+								{
+									"_type": "span",
+									"_key": "k5p",
+									"text": "Conteúdos Relevantes",
+									"marks": []
+								}
+							]
+						},
+						{
+							"_type": "block",
+							"_key": "k5t",
+							"style": "normal",
+							"listItem": "bullet",
+							"level": 1,
+							"markDefs": [
+								{
+									"_key": "k5r",
+									"_type": "link",
+									"href": "https://flaviocopes.com/javascript-unicode/"
+								}
+							],
+							"children": [
+								{
+									"_type": "span",
+									"_key": "k5s",
+									"text": "Unicode in JavaScript",
+									"marks": [
+										"k5r"
+									]
+								}
+							]
+						},
+						{
+							"_type": "block",
+							"_key": "k5w",
+							"style": "normal",
+							"listItem": "bullet",
+							"level": 1,
+							"markDefs": [
+								{
+									"_key": "k5u",
+									"_type": "link",
+									"href": "https://home.unicode.org/"
+								}
+							],
+							"children": [
+								{
+									"_type": "span",
+									"_key": "k5v",
+									"text": "Site Oficial Unicode",
+									"marks": [
+										"k5u"
+									]
+								}
+							]
+						},
+						{
+							"_type": "block",
+							"_key": "k5z",
+							"style": "normal",
+							"listItem": "bullet",
+							"level": 1,
+							"markDefs": [
+								{
+									"_key": "k5x",
+									"_type": "link",
+									"href": "https://en.wikipedia.org/wiki/Unicode_block"
+								}
+							],
+							"children": [
+								{
+									"_type": "span",
+									"_key": "k5y",
+									"text": "Unicode Block",
+									"marks": [
+										"k5x"
+									]
+								}
+							]
+						}
+					],
+					"excerpt": "Usando funções nativas que ajudam no dia a dia."
+				},
+				"bylines": [
+					{
+						"byline": "byline-rhamses"
+					}
+				],
+				"taxonomies": {
+					"category": [
+						"development"
+					],
+					"tag": [
+						"webdev"
+					]
+				},
+				"locale": "pt"
+			},
+			{
+				"id": "post-web-components-exemplos-e-overview",
+				"slug": "web-components-exemplos-e-overview",
+				"status": "published",
+				"publishedAt": "2023-11-10T12:00:00.000Z",
+				"data": {
+					"title": "WEB COMPONENTS - EXEMPLOS e OVERVIEW",
+					"featured_image": {
+						"$media": {
+							"url": "https://raw.githubusercontent.com/rhamses/blog/main/public/assets/blog/web-components-exemplos-e-overview/capa.webp",
+							"alt": "WEB COMPONENTS - EXEMPLOS e OVERVIEW",
+							"filename": "capa.webp"
+						}
+					},
+					"content": [
+						{
+							"_type": "block",
+							"_key": "kcf",
+							"style": "normal",
+							"markDefs": [],
+							"children": [
+								{
+									"_type": "span",
+									"_key": "kce",
+									"text": "Web Components já são uma realidade e muitos de nós trabalhamos todo dia usando algum framework JS como React, Vuejs, Angular com vários deles em nosso projeto... Mas e se quisermos trazer essa mesma flexibilidade para um projeto HTML puro?",
+									"marks": []
+								}
+							]
+						},
+						{
+							"_type": "block",
+							"_key": "kch",
+							"style": "h2",
+							"markDefs": [],
+							"children": [
+								{
+									"_type": "span",
+									"_key": "kcg",
+									"text": "Como funciona",
+									"marks": []
+								}
+							]
+						},
+						{
+							"_type": "block",
+							"_key": "kco",
+							"style": "normal",
+							"markDefs": [],
+							"children": [
+								{
+									"_type": "span",
+									"_key": "kci",
+									"text": "Um Web Component é o resultado do uso de três especificações diferentes: ",
+									"marks": []
+								},
+								{
+									"_type": "span",
+									"_key": "kcj",
+									"text": "Custom Elements",
+									"marks": [
+										"strong"
+									]
+								},
+								{
+									"_type": "span",
+									"_key": "kck",
+									"text": ", ",
+									"marks": []
+								},
+								{
+									"_type": "span",
+									"_key": "kcl",
+									"text": "Shadow Dom",
+									"marks": [
+										"strong"
+									]
+								},
+								{
+									"_type": "span",
+									"_key": "kcm",
+									"text": " e ",
+									"marks": []
+								},
+								{
+									"_type": "span",
+									"_key": "kcn",
+									"text": "HTML Templates",
+									"marks": [
+										"strong"
+									]
+								}
+							]
+						},
+						{
+							"_type": "block",
+							"_key": "kcr",
+							"style": "h3",
+							"markDefs": [
+								{
+									"_key": "kcp",
+									"_type": "link",
+									"href": "https://developer.mozilla.org/en-US/docs/Web/API/CustomElementRegistry"
+								}
+							],
+							"children": [
+								{
+									"_type": "span",
+									"_key": "kcq",
+									"text": "Custom Elements",
+									"marks": [
+										"kcp"
+									]
+								}
+							]
+						},
+						{
+							"_type": "block",
+							"_key": "kcv",
+							"style": "normal",
+							"markDefs": [],
+							"children": [
+								{
+									"_type": "span",
+									"_key": "kcs",
+									"text": "É a especificação que é responsável por criar e gerenciar elementos HTML customizáveis. É atráves do seu método ",
+									"marks": []
+								},
+								{
+									"_type": "span",
+									"_key": "kct",
+									"text": ".define()",
+									"marks": [
+										"code"
+									]
+								},
+								{
+									"_type": "span",
+									"_key": "kcu",
+									"text": " que habilitamos uma nova tag de ser utilizada na página que está inserido.",
+									"marks": []
+								}
+							]
+						},
+						{
+							"_type": "block",
+							"_key": "kcz",
+							"style": "normal",
+							"markDefs": [
+								{
+									"_key": "kcx",
+									"_type": "link",
+									"href": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Classes"
+								}
+							],
+							"children": [
+								{
+									"_type": "span",
+									"_key": "kcw",
+									"text": "Para isso precisamos definir nosso novo elemento e fazemos isso usando uma ",
+									"marks": []
+								},
+								{
+									"_type": "span",
+									"_key": "kcy",
+									"text": "classe dentro do JS",
+									"marks": [
+										"kcx"
+									]
+								}
+							]
+						},
+						{
+							"_type": "code",
+							"_key": "kd0",
+							"code": "class MyCustomElement extends HTMLElement {\n  static observedAttributes = [\"color\", \"size\"];\n\n  constructor() {\n    // Always call super first in constructor\n    super();\n  }\n\n  connectedCallback() {\n    console.log(\"Custom element added to page.\");\n  }\n\n  disconnectedCallback() {\n    console.log(\"Custom element removed from page.\");\n  }\n\n  adoptedCallback() {\n    console.log(\"Custom element moved to new page.\");\n  }\n\n  attributeChangedCallback(name, oldValue, newValue) {\n    console.log(`Attribute ${name} has changed.`);\n  }\n}"
+						},
+						{
+							"_type": "block",
+							"_key": "kd2",
+							"style": "normal",
+							"markDefs": [],
+							"children": [
+								{
+									"_type": "span",
+									"_key": "kd1",
+									"text": "Neste exemplo se tem o ciclo de vida de um Web Component e o mais importante a capacidade de extender qualquer componente HTML já existente (sim, um `",
+									"marks": []
+								}
+							]
+						},
+						{
+							"_type": "block",
+							"_key": "kd6",
+							"style": "normal",
+							"markDefs": [],
+							"children": [
+								{
+									"_type": "span",
+									"_key": "kd3",
+									"text": " ou um ",
+									"marks": [
+										"code"
+									]
+								},
+								{
+									"_type": "span",
+									"_key": "kd4",
+									"text": " também são componentes!). [O exemplo](https://developer.mozilla.org/en-US/docs/Web/API/Web_components/Using_custom_elements) está extendendo a classe que é um quadro em branco chamado ",
+									"marks": [
+										"code"
+									]
+								},
+								{
+									"_type": "span",
+									"_key": "kd5",
+									"text": "HTMLElement` que vai nos fornecer toda a estrutura pra criarmos nosso elemento do zero!",
+									"marks": []
+								}
+							]
+						},
+						{
+							"_type": "block",
+							"_key": "kd9",
+							"style": "h2",
+							"markDefs": [
+								{
+									"_key": "kd7",
+									"_type": "link",
+									"href": "https://developer.mozilla.org/en-US/docs/Web/API/Web_components/Using_shadow_DOM"
+								}
+							],
+							"children": [
+								{
+									"_type": "span",
+									"_key": "kd8",
+									"text": "Shadow DOM",
+									"marks": [
+										"kd7"
+									]
+								}
+							]
+						},
+						{
+							"_type": "block",
+							"_key": "kdf",
+							"style": "normal",
+							"markDefs": [],
+							"children": [
+								{
+									"_type": "span",
+									"_key": "kda",
+									"text": "Criar um novo elemento significa inserir um potencial conflito dentro de uma página que já tenha muitas outras tags, scripts e css configurados. O ",
+									"marks": []
+								},
+								{
+									"_type": "span",
+									"_key": "kdb",
+									"text": "Shadow DOM",
+									"marks": [
+										"strong"
+									]
+								},
+								{
+									"_type": "span",
+									"_key": "kdc",
+									"text": " faz esse conflito desaparecer *encapsulando* toda a estrutura que você precisa neste elemento dentro de uma ",
+									"marks": []
+								},
+								{
+									"_type": "span",
+									"_key": "kdd",
+									"text": "shadow root",
+									"marks": [
+										"strong"
+									]
+								},
+								{
+									"_type": "span",
+									"_key": "kde",
+									"text": " que é como se fosse um novo documento HTML dentro desse elemento. ",
+									"marks": []
+								}
+							]
+						},
+						{
+							"_type": "block",
+							"_key": "kdi",
+							"style": "normal",
+							"markDefs": [],
+							"children": [
+								{
+									"_type": "span",
+									"_key": "kdg",
+									"text": "Qualquer elemento pode ter um Shadow DOM",
+									"marks": [
+										"strong"
+									]
+								},
+								{
+									"_type": "span",
+									"_key": "kdh",
+									"text": " - Com isso você pode manipular toda essa estrutura sem preocupar com conflitos com o documento principal pois são árvores de informação separadas.",
+									"marks": []
+								}
+							]
+						},
+						{
+							"_type": "block",
+							"_key": "kdk",
+							"style": "normal",
+							"markDefs": [],
+							"children": [
+								{
+									"_type": "span",
+									"_key": "kdj",
+									"text": "E para criar um shadow DOM é muito simples. Toda a interação e manipulação é exatamente igual aos elementos que seriam manipulados dentro de uma página HTML tradicional, com a vantagem de estarem \"escondidas\" do navegador até o momento que decidimos adiciona-las no nosso elemento.",
+									"marks": []
+								}
+							]
+						},
+						{
+							"_type": "code",
+							"_key": "kdl",
+							"code": "const host = document.querySelector(\"#host\");\nconst shadow = host.attachShadow({ mode: \"open\" });\nconst span = document.createElement(\"span\");\nspan.textContent = \"I'm in the shadow DOM\";\nshadow.appendChild(span);"
+						},
+						{
+							"_type": "block",
+							"_key": "kdn",
+							"style": "normal",
+							"markDefs": [],
+							"children": [
+								{
+									"_type": "span",
+									"_key": "kdm",
+									"text": "O exemplo é um pedaço do exemplo da MDN. Consulte o link do título para ver todo o resto.",
+									"marks": []
+								}
+							]
+						},
+						{
+							"_type": "block",
+							"_key": "kdq",
+							"style": "h2",
+							"markDefs": [
+								{
+									"_key": "kdo",
+									"_type": "link",
+									"href": "https://developer.mozilla.org/en-US/docs/Web/API/Web_components/Using_templates_and_slots"
+								}
+							],
+							"children": [
+								{
+									"_type": "span",
+									"_key": "kdp",
+									"text": "HTML Templates Tag",
+									"marks": [
+										"kdo"
+									]
+								}
+							]
+						},
+						{
+							"_type": "block",
+							"_key": "kds",
+							"style": "normal",
+							"markDefs": [],
+							"children": [
+								{
+									"_type": "span",
+									"_key": "kdr",
+									"text": "Quem veio de Vue.js já esta familiarizado com essas tags. O que eu não sabia era que elas são recomendações W3C!",
+									"marks": []
+								}
+							]
+						},
+						{
+							"_type": "block",
+							"_key": "kdw",
+							"style": "normal",
+							"markDefs": [],
+							"children": [
+								{
+									"_type": "span",
+									"_key": "kdt",
+									"text": "As tags ",
+									"marks": []
+								},
+								{
+									"_type": "span",
+									"_key": "kdu",
+									"text": "` e ",
+									"marks": [
+										"code"
+									]
+								},
+								{
+									"_type": "span",
+									"_key": "kdv",
+									"text": "` são tags especiais que aceitam receber conteúdo mas não renderizam nada quando a página é carregada pelo navegador. Além disso elas provêm uma forma de serem manipuladas via Javascript que é possível criar uma estrutura HTML que seja equivalente ao código JS que precisamos fazer (como *named slots*)",
+									"marks": []
+								}
+							]
+						},
+						{
+							"_type": "code",
+							"_key": "kdx",
+							"code": "HTML\n\n  \n\nMy paragraph\n\nJS\nlet template = document.getElementById(\"my-paragraph\");\nlet templateContent = template.content;\ndocument.body.appendChild(templateContent);"
+						},
+						{
+							"_type": "block",
+							"_key": "kdz",
+							"style": "h2",
+							"markDefs": [],
+							"children": [
+								{
+									"_type": "span",
+									"_key": "kdy",
+									"text": "Demo",
+									"marks": []
+								}
+							]
+						},
+						{
+							"_type": "block",
+							"_key": "ke6",
+							"style": "normal",
+							"markDefs": [
+								{
+									"_key": "ke1",
+									"_type": "link",
+									"href": "https://github.com/rhamses/ans-tag"
+								}
+							],
+							"children": [
+								{
+									"_type": "span",
+									"_key": "ke0",
+									"text": "Criei um ",
+									"marks": []
+								},
+								{
+									"_type": "span",
+									"_key": "ke2",
+									"text": "Web Component para receber um número ANS",
+									"marks": [
+										"ke1"
+									]
+								},
+								{
+									"_type": "span",
+									"_key": "ke3",
+									"text": " de um plano de saúde. Essa informação é obrigatória para sites da área da saúde e geralmente usa-se imagens para inserir essas informações. Por ser uma tag HTML é possível personalizar o tamanho de acordo com a necessidade apenas mudando o ",
+									"marks": []
+								},
+								{
+									"_type": "span",
+									"_key": "ke4",
+									"text": "font-size",
+									"marks": [
+										"code"
+									]
+								},
+								{
+									"_type": "span",
+									"_key": "ke5",
+									"text": " da tag.",
+									"marks": []
+								}
+							]
+						},
+						{
+							"_type": "image",
+							"_key": "ke7",
+							"alt": "",
+							"asset": {
+								"url": "https://raw.githubusercontent.com/rhamses/ans-tag/main/demo/ans-demo.gif"
+							}
+						},
+						{
+							"_type": "block",
+							"_key": "ke9",
+							"style": "h2",
+							"markDefs": [],
+							"children": [
+								{
+									"_type": "span",
+									"_key": "ke8",
+									"text": "Sites de referência para aprender mais",
+									"marks": []
+								}
+							]
+						},
+						{
+							"_type": "block",
+							"_key": "kec",
+							"style": "normal",
+							"listItem": "bullet",
+							"level": 1,
+							"markDefs": [
+								{
+									"_key": "kea",
+									"_type": "link",
+									"href": "https://developer.mozilla.org/en-US/docs/Web/API/Web_components"
+								}
+							],
+							"children": [
+								{
+									"_type": "span",
+									"_key": "keb",
+									"text": "MDN",
+									"marks": [
+										"kea"
+									]
+								}
+							]
+						},
+						{
+							"_type": "block",
+							"_key": "kef",
+							"style": "normal",
+							"listItem": "bullet",
+							"level": 1,
+							"markDefs": [
+								{
+									"_key": "ked",
+									"_type": "link",
+									"href": "https://www.webcomponents.org"
+								}
+							],
+							"children": [
+								{
+									"_type": "span",
+									"_key": "kee",
+									"text": "WebComponents.org",
+									"marks": [
+										"ked"
+									]
+								}
+							]
+						},
+						{
+							"_type": "block",
+							"_key": "keh",
+							"style": "h2",
+							"markDefs": [],
+							"children": [
+								{
+									"_type": "span",
+									"_key": "keg",
+									"text": "Frameworks que ajudam no dia a dia",
+									"marks": []
+								}
+							]
+						},
+						{
+							"_type": "block",
+							"_key": "kek",
+							"style": "normal",
+							"listItem": "bullet",
+							"level": 1,
+							"markDefs": [
+								{
+									"_key": "kei",
+									"_type": "link",
+									"href": "https://lit.dev"
+								}
+							],
+							"children": [
+								{
+									"_type": "span",
+									"_key": "kej",
+									"text": "Lit",
+									"marks": [
+										"kei"
+									]
+								}
+							]
+						},
+						{
+							"_type": "block",
+							"_key": "ken",
+							"style": "normal",
+							"listItem": "bullet",
+							"level": 1,
+							"markDefs": [
+								{
+									"_key": "kel",
+									"_type": "link",
+									"href": "https://polymer-library.polymer-project.org"
+								}
+							],
+							"children": [
+								{
+									"_type": "span",
+									"_key": "kem",
+									"text": "Polymer",
+									"marks": [
+										"kel"
+									]
+								}
+							]
+						},
+						{
+							"_type": "block",
+							"_key": "keq",
+							"style": "normal",
+							"listItem": "bullet",
+							"level": 1,
+							"markDefs": [
+								{
+									"_key": "keo",
+									"_type": "link",
+									"href": "https://stenciljs.com"
+								}
+							],
+							"children": [
+								{
+									"_type": "span",
+									"_key": "kep",
+									"text": "Stencil",
+									"marks": [
+										"keo"
+									]
+								}
+							]
+						}
+					],
+					"excerpt": "Como usar Web Components no dia a dia"
+				},
+				"bylines": [
+					{
+						"byline": "byline-rhamses"
+					}
+				],
+				"taxonomies": {
+					"category": [
+						"development"
+					],
+					"tag": [
+						"webdev"
+					]
+				},
+				"locale": "pt"
+			}
+		]
+	},
+	"defaultLocale": "pt"
+}
