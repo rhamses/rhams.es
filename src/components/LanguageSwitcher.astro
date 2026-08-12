@@ -1,0 +1,87 @@
+---
+import { getTranslations } from "emdash";
+import { getRelativeLocaleUrl } from "astro:i18n";
+
+interface Props {
+	collection: string;
+	entryId: string;
+	/** Path prefix without trailing slash, e.g. `/posts` or `/pages` */
+	pathPrefix: string;
+}
+
+const { collection, entryId, pathPrefix } = Astro.props;
+const current = Astro.currentLocale ?? "pt";
+
+const { translations } = await getTranslations(collection, entryId);
+const published = translations.filter((t) => t.status === "published");
+
+const labels: Record<string, string> = {
+	pt: "PT",
+	en: "EN",
+};
+
+// Always show both configured locales; link to translation when available,
+// otherwise fall back to that locale's home.
+const locales = ["pt", "en"];
+---
+
+{
+	locales.length > 1 && (
+		<nav class="lang-switcher" aria-label="Language">
+			{locales.map((loc) => {
+				const match = published.find((t) => t.locale === loc);
+				const href = match
+					? getRelativeLocaleUrl(loc, `${pathPrefix}/${match.slug}`)
+					: getRelativeLocaleUrl(loc, "/");
+				const isCurrent = loc === current;
+				return (
+					<a
+						href={href}
+						class:list={["lang-link", { active: isCurrent }]}
+						aria-current={isCurrent ? "page" : undefined}
+						hreflang={loc}
+					>
+						{labels[loc] ?? loc.toUpperCase()}
+					</a>
+				);
+			})}
+		</nav>
+	)
+}
+
+<style>
+	.lang-switcher {
+		display: inline-flex;
+		gap: var(--spacing-1);
+		padding: var(--spacing-1);
+		background: var(--color-surface);
+		border-radius: var(--radius);
+		margin-bottom: var(--spacing-4);
+	}
+
+	.lang-link {
+		display: inline-flex;
+		align-items: center;
+		justify-content: center;
+		min-width: 32px;
+		height: 28px;
+		padding: 0 var(--spacing-2);
+		font-size: var(--font-size-xs);
+		font-weight: 600;
+		letter-spacing: var(--tracking-wide);
+		color: var(--color-muted);
+		text-decoration: none;
+		border-radius: var(--radius);
+		transition: all var(--transition-fast);
+	}
+
+	.lang-link:hover {
+		color: var(--color-text-secondary);
+	}
+
+	.lang-link.active {
+		background: var(--color-bg);
+		color: var(--color-text);
+		box-shadow: var(--shadow-sm);
+	}
+</style>

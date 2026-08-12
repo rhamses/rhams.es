@@ -1,0 +1,37 @@
+{
+	"$schema": "node_modules/wrangler/config-schema.json",
+	"name": "rhamses-site",
+	"account_id": "182788b23836a15ba32a69d616ba1db1",
+	"main": "./src/worker.ts",
+	"compatibility_date": "2026-02-24",
+	"compatibility_flags": ["nodejs_compat"],
+	"d1_databases": [
+		{
+			"binding": "DB",
+			"database_name": "rhamses-site",
+			"database_id": "825c67c1-454d-48b6-9b1e-3b635c7b02d0",
+		},
+	],
+	"r2_buckets": [
+		{
+			"binding": "MEDIA",
+			"bucket_name": "rhamses-media",
+		},
+	],
+	// Cloudflare Email Sending — used by @emdash-cms/cloudflare cloudflareEmail()
+	"send_email": [
+		{
+			"name": "EMAIL",
+		},
+	],
+	// Worker Loader for plugin sandboxing
+	"worker_loaders": [
+		{
+			"binding": "LOADER",
+		},
+	],
+	// Drives scheduled publishing, plugin cron, and maintenance (see src/worker.ts)
+	"triggers": {
+		"crons": ["* * * * *"],
+	},
+}
