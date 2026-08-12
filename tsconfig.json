@@ -1,8 +1,7 @@
 {
-  "extends": "astro/tsconfigs/strict",
-  "include": [".astro/types.d.ts", "**/*"],
-  "exclude": ["dist"],
-  "compilerOptions": {
-    "allowJs": true // required, and included with all Astro templates
-  }
+	"extends": "astro/tsconfigs/base",
+	"compilerOptions": {
+		"types": ["node"]
+	},
+	"include": ["src", ".astro/types.d.ts", "emdash-env.d.ts"]
 }

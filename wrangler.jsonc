@@ -18,6 +18,12 @@
 			"bucket_name": "rhamses-media",
 		},
 	],
+	// Cloudflare Email Sending — used by @emdash-cms/cloudflare cloudflareEmail()
+	"send_email": [
+		{
+			"name": "EMAIL",
+		},
+	],
 	// Worker Loader for plugin sandboxing
 	"worker_loaders": [
 		{

@@ -1,33 +1,61 @@
-// @ts-check
-import { defineConfig } from 'astro/config';
+import cloudflare from "@astrojs/cloudflare";
+import react from "@astrojs/react";
+import { d1, r2, sandbox } from "@emdash-cms/cloudflare";
+import { cloudflareEmail } from "@emdash-cms/cloudflare/plugins";
+import { formsPlugin } from "@emdash-cms/plugin-forms";
+import webhookNotifier from "@emdash-cms/plugin-webhook-notifier";
+import { defineConfig, fontProviders } from "astro/config";
+import emdash from "emdash/astro";
 
-import mdx from '@astrojs/mdx';
-
-import sitemap from '@astrojs/sitemap';
-
-import tailwindcss from '@tailwindcss/vite';
-
-import cloudflare from '@astrojs/cloudflare';
-
-import partytown from '@astrojs/partytown';
-
-import markdoc from '@astrojs/markdoc';
-
-import alpinejs from '@astrojs/alpinejs';
-
-import icon from 'astro-icon';
-
-import robotsTxt from 'astro-robots-txt';
-
-import svelte from '@astrojs/svelte';
-
-// https://astro.build/config
 export default defineConfig({
-  integrations: [mdx(), sitemap(), partytown(), markdoc(), alpinejs(), icon(), robotsTxt(), svelte()],
-
-  vite: {
-    plugins: [tailwindcss()]
-  },
-
-  adapter: cloudflare()
+	output: "server",
+	adapter: cloudflare(),
+	i18n: {
+		defaultLocale: "pt",
+		locales: ["pt", "en"],
+		fallback: {
+			en: "pt",
+		},
+		// Keep default (prefix-other-locales). Do not set prefixDefaultLocale —
+		// it breaks /_emdash/admin (Astro injectRoute + i18n limitation).
+	},
+	image: {
+		layout: "constrained",
+		responsiveStyles: true,
+	},
+	integrations: [
+		react(),
+		emdash({
+			database: d1({ binding: "DB", session: "auto" }),
+			storage: r2({ binding: "MEDIA" }),
+			plugins: [
+				formsPlugin(),
+				cloudflareEmail({
+					from: { email: "noreply@rhams.es", name: "Rhamsés Blog" },
+					replyTo: "hello@rhams.es",
+					binding: "EMAIL",
+				}),
+			],
+			sandboxed: [webhookNotifier],
+			sandboxRunner: sandbox(),
+			marketplace: "https://marketplace.emdashcms.com",
+		}),
+	],
+	fonts: [
+		{
+			provider: fontProviders.google(),
+			name: "Inter",
+			cssVariable: "--font-body",
+			weights: [400, 500, 600, 700],
+			fallbacks: ["sans-serif"],
+		},
+		{
+			provider: fontProviders.google(),
+			name: "JetBrains Mono",
+			cssVariable: "--font-mono",
+			weights: [400, 500],
+			fallbacks: ["monospace"],
+		},
+	],
+	devToolbar: { enabled: false },
 });
