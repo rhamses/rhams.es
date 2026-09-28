@@ -9,7 +9,9 @@ import {
 import { createPublicPageContext } from "emdash/page";
 import LiveSearch from "emdash/ui/search";
 import { Font } from "astro:assets";
+import { env } from "cloudflare:workers";
 import { pwaInfo } from "virtual:pwa-info";
+import { publishVersion } from "../utils/content-version";
 import { resolveBlogSiteIdentity } from "../utils/site-identity";
 import { localePath, localeTag } from "../utils/i18n";
 import "../styles/tokens.css";
@@ -68,6 +70,12 @@ const searchRouteMap = {
 	pages: localePath(locale, "/pages/:path"),
 };
 const searchPlaceholder = locale === "en" ? "Search..." : "Buscar...";
+const UPDATE_NOTICE: Record<string, { text: string; action: string }> = {
+	pt: { text: "Há conteúdo novo no site.", action: "Atualizar" },
+	en: { text: "There's new content on the site.", action: "Update" },
+};
+const updateNotice = UPDATE_NOTICE[locale] ?? UPDATE_NOTICE.pt;
+const contentVersion = await publishVersion(env.CACHE, locale);
 const footerNav =
 	locale === "en"
 		? { navigate: "Navigate", connect: "Connect", home: "Home", allPosts: "All Posts", rss: "RSS Feed" }
@@ -104,6 +112,7 @@ const pageCtx = createPublicPageContext({
 		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
 		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
 		<meta name="theme-color" content="#0066cc" />
+		<meta name="content-version" content={contentVersion} />
 		{pwaInfo && <Fragment set:html={pwaInfo.webManifest.linkTag} />}
 		<script src="../pwa.ts"></script>
 		<Font cssVariable="--font-body" preload />
@@ -305,6 +314,97 @@ const pageCtx = createPublicPageContext({
 				</div>
 			</div>
 		</footer>
+
+		<div class="update-notice" role="status" aria-live="polite" data-home={homeHref} data-locale={locale} hidden>
+			<p class="update-notice-text">{updateNotice.text}</p>
+			<button type="button" class="update-notice-btn">{updateNotice.action}</button>
+		</div>
+
+		<script>
+			const VERSION_URL = "/_site/version";
+			const POLL_MS = 20_000;
+			const REFRESH_PARAM = "_refresh";
+
+			const refreshedUrl = new URL(location.href);
+			if (refreshedUrl.searchParams.has(REFRESH_PARAM)) {
+				refreshedUrl.searchParams.delete(REFRESH_PARAM);
+				history.replaceState(history.state, "", refreshedUrl);
+			}
+
+			const notice = document.querySelector<HTMLElement>(".update-notice");
+			if (notice && !location.pathname.startsWith("/_emdash")) {
+				const locale = notice.dataset.locale ?? "";
+				const homeUrl = new URL(notice.dataset.home || "/", location.origin);
+				const seenKey = `content-version-seen:${locale}`;
+
+				const readSeen = (): string | null => {
+					try {
+						return localStorage.getItem(seenKey);
+					} catch {
+						return null;
+					}
+				};
+				const markSeen = (version: string) => {
+					baseline = version;
+					try {
+						localStorage.setItem(seenKey, version);
+					} catch {
+						// Storage blocked: the notice then only tracks this page.
+					}
+				};
+				const isNewer = (version: string, than: string) => Number(version) > Number(than);
+
+				// The last version the reader acknowledged, kept across pages so the
+				// notice follows them until they update. Landing on an up-to-date
+				// home counts as seeing it.
+				let baseline = readSeen();
+				const pageVersion =
+					document.querySelector<HTMLMetaElement>('meta[name="content-version"]')?.content ??
+					null;
+				const onHome = location.pathname === homeUrl.pathname;
+				if (pageVersion && (baseline === null || (onHome && isNewer(pageVersion, baseline)))) {
+					markSeen(pageVersion);
+				}
+
+				let latest: string | null = null;
+				let timer: number | undefined;
+
+				const check = async () => {
+					if (!notice.hidden) return;
+					try {
+						const res = await fetch(`${VERSION_URL}?locale=${encodeURIComponent(locale)}`, {
+							cache: "no-store",
+						});
+						if (!res.ok) return;
+						const { version } = (await res.json()) as { version: string };
+						latest = version;
+						if (baseline === null) markSeen(version);
+						else if (isNewer(version, baseline)) {
+							notice.hidden = false;
+							clearInterval(timer);
+						}
+					} catch {
+						// Offline: try again on the next tick.
+					}
+				};
+
+				notice.querySelector("button")?.addEventListener("click", async () => {
+					if (latest) markSeen(latest);
+					if ("caches" in window) {
+						const keys = await caches.keys();
+						await Promise.all(keys.map((key) => caches.delete(key)));
+					}
+					homeUrl.searchParams.set(REFRESH_PARAM, String(Date.now()));
+					location.replace(homeUrl);
+				});
+
+				check();
+				timer = window.setInterval(check, POLL_MS);
+				document.addEventListener("visibilitychange", () => {
+					if (document.visibilityState === "visible") check();
+				});
+			}
+		</script>
 
 		<script>
 			// Theme switcher
@@ -806,6 +906,61 @@ const pageCtx = createPublicPageContext({
 			.theme-btn svg {
 				width: 16px;
 				height: 16px;
+			}
+
+			/* Update notice */
+			.update-notice {
+				position: fixed;
+				inset-inline: var(--spacing-4);
+				bottom: var(--spacing-4);
+				z-index: 200;
+				display: flex;
+				align-items: center;
+				justify-content: space-between;
+				gap: var(--spacing-4);
+				max-width: 420px;
+				margin-inline: auto;
+				padding: var(--spacing-3) var(--spacing-4);
+				background: var(--color-bg);
+				border: 1px solid var(--color-border);
+				border-radius: var(--radius-lg);
+				box-shadow: var(--shadow-lg);
+			}
+
+			:global(body:has(#emdash-toolbar)) .update-notice {
+				bottom: calc(var(--spacing-4) * 2 + 34px);
+			}
+
+			.update-notice[hidden] {
+				display: none;
+			}
+
+			.update-notice-text {
+				font-size: var(--font-size-sm);
+				color: var(--color-text);
+			}
+
+			.update-notice-btn {
+				flex-shrink: 0;
+				padding: var(--spacing-2) var(--spacing-4);
+				font-family: var(--font-body);
+				font-size: var(--font-size-sm);
+				font-weight: 600;
+				color: var(--color-on-brand);
+				background: var(--color-brand);
+				border: none;
+				border-radius: var(--radius);
+				cursor: pointer;
+				transition: background var(--transition-fast);
+			}
+
+			.update-notice-btn:hover {
+				background: var(--color-brand-hover);
+			}
+
+			.update-notice-btn:focus-visible {
+				outline: none;
+				box-shadow: 0 0 0 3px var(--color-brand-ring);
 			}
 
 			@media (max-width: 900px) {

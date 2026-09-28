@@ -2,12 +2,16 @@
 // Public HTML is stored in the Cache API and in KV. PluginBridge is the
 // sandbox Durable Object, re-exported so its binding resolves.
 import emdashWorker, { PluginBridge } from "@emdash-cms/cloudflare/worker";
+import { publishVersion, publishVersionKey } from "./utils/content-version";
 
 const EDGE_TTL_SECONDS = 60;
 const KV_TTL_SECONDS = 60 * 60;
 // Never a public URL: the key cannot collide with other apps in the isolate.
 const CACHE_ORIGIN = "https://rhamses-site.internal/";
 const GEN_KEY = "page-cache-generation";
+const VERSION_PATH = "/_site/version";
+const LOCALE_PATTERN = /^[a-z]{2,3}(?:-[A-Za-z]{2,4})?$/;
+const PUBLISH_PATH = /^\/_emdash\/api\/content\/[^/]+\/[^/]+\/publish$/;
 const BYPASS = [/^\/_emdash(?:\/|$)/, /^\/rss\.xml$/];
 
 const edgeCache = () => (caches as unknown as { default: Cache }).default;
@@ -28,6 +32,37 @@ function cacheRequestFor(url: URL, generation: string): Request {
 
 async function cacheGeneration(env: Env): Promise<string> {
 	return (await env.CACHE.get(GEN_KEY)) ?? "0";
+}
+
+async function versionResponse(url: URL, env: Env): Promise<Response> {
+	const locale = url.searchParams.get("locale") ?? "";
+	if (!LOCALE_PATTERN.test(locale)) {
+		return Response.json({ error: "locale required" }, { status: 400 });
+	}
+	return Response.json(
+		{ version: await publishVersion(env.CACHE, locale) },
+		{ headers: { "cache-control": "no-store" } },
+	);
+}
+
+async function publishedLocale(response: Response): Promise<string | null> {
+	try {
+		const body = (await response.json()) as { data?: { item?: { locale?: unknown } } };
+		const locale = body.data?.item?.locale;
+		return typeof locale === "string" && LOCALE_PATTERN.test(locale) ? locale : null;
+	} catch {
+		return null;
+	}
+}
+
+async function bumpVersions(request: Request, response: Response, env: Env): Promise<void> {
+	const now = String(Date.now());
+	const writes = [env.CACHE.put(GEN_KEY, now)];
+	if (request.method === "POST" && PUBLISH_PATH.test(new URL(request.url).pathname)) {
+		const locale = await publishedLocale(response);
+		if (locale) writes.push(env.CACHE.put(publishVersionKey(locale), now));
+	}
+	await Promise.all(writes);
 }
 
 function hasPrivateCookie(response: Response): boolean {
@@ -66,16 +101,22 @@ const worker = {
 		const origin = emdashWorker.fetch;
 		if (!origin) return new Response("Not found", { status: 404 });
 
+		const url = new URL(request.url);
+		if (request.method === "GET" && url.pathname === VERSION_PATH) {
+			return versionResponse(url, env);
+		}
+
 		if (!isPublicGet(request)) {
 			const response = await origin.call(emdashWorker, request, env, ctx);
 			if (request.method !== "GET" && request.method !== "HEAD" && response.ok) {
-				ctx.waitUntil(env.CACHE.put(GEN_KEY, String(Date.now())));
+				ctx.waitUntil(bumpVersions(request, response.clone(), env));
 			}
 			return response;
 		}
 
 		const cache = edgeCache();
-		const cacheRequest = cacheRequestFor(new URL(request.url), await cacheGeneration(env));
+		const generation = await cacheGeneration(env);
+		const cacheRequest = cacheRequestFor(url, generation);
 		const edgeHit = await cache.match(cacheRequest);
 		if (edgeHit) {
 			const headers = new Headers(edgeHit.headers);
