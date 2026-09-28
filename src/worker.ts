@@ -120,6 +120,8 @@ const worker = {
 		const edgeHit = await cache.match(cacheRequest);
 		if (edgeHit) {
 			const headers = new Headers(edgeHit.headers);
+			// The zone's Browser Cache TTL rewrites max-age on cached entries.
+			headers.set("cache-control", `public, max-age=${EDGE_TTL_SECONDS}`);
 			headers.set("x-cache", "EDGE");
 			return new Response(edgeHit.body, { status: edgeHit.status, headers });
 		}
