@@ -4,10 +4,18 @@ import { d1, r2, sandbox } from "@emdash-cms/cloudflare";
 import { cloudflareEmail } from "@emdash-cms/cloudflare/plugins";
 import { formsPlugin } from "@emdash-cms/plugin-forms";
 import webhookNotifier from "@emdash-cms/plugin-webhook-notifier";
+import AstroPWA from "@vite-pwa/astro";
 import { defineConfig, fontProviders } from "astro/config";
 import emdash from "emdash/astro";
+import { fileURLToPath } from "node:url";
+
+// With the Cloudflare adapter, public files go to dist/client.
+const clientDir = fileURLToPath(new URL("./dist/client", import.meta.url));
+const host = process.env.TAURI_DEV_HOST;
+const isTauri = !!process.env.TAURI_ENV_PLATFORM;
 
 export default defineConfig({
+	site: "https://rhams.es",
 	output: "server",
 	adapter: cloudflare(),
 	i18n: {
@@ -40,6 +48,39 @@ export default defineConfig({
 			sandboxRunner: sandbox(),
 			marketplace: "https://marketplace.emdashcms.com",
 		}),
+		AstroPWA({
+			disable: isTauri,
+			outDir: clientDir,
+			registerType: "autoUpdate",
+			includeAssets: ["favicon.svg", "offline.html"],
+			manifest: {
+				name: "Rhamsés Blog",
+				short_name: "rhams.es",
+				description: "Artigos sobre engenharia de software e desenvolvimento web.",
+				theme_color: "#0066cc",
+				background_color: "#ffffff",
+				display: "standalone",
+				start_url: "/",
+				icons: [
+					{
+						src: "favicon.svg",
+						sizes: "any",
+						type: "image/svg+xml",
+						purpose: "any",
+					},
+				],
+			},
+			workbox: {
+				globDirectory: clientDir,
+				navigateFallback: "/offline.html",
+				navigateFallbackDenylist: [/^\/_emdash/, /^\/rss\.xml/],
+				globPatterns: ["**/*.{css,js,html,svg,png,ico,txt,woff,woff2,webp}"],
+				globIgnores: ["**/PluginRegistry*.js"],
+			},
+			experimental: {
+				directoryAndTrailingSlashHandler: true,
+			},
+		}),
 	],
 	fonts: [
 		{
@@ -58,4 +99,25 @@ export default defineConfig({
 		},
 	],
 	devToolbar: { enabled: false },
+	server: {
+		host: host || false,
+		port: 4321,
+	},
+	vite: {
+		clearScreen: false,
+		server: {
+			strictPort: true,
+			host: host || false,
+			hmr: host
+				? {
+						protocol: "ws",
+						host,
+						port: 4322,
+					}
+				: undefined,
+			watch: {
+				ignored: ["**/src-tauri/**"],
+			},
+		},
+	},
 });

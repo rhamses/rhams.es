@@ -5,6 +5,8 @@ declare namespace Cloudflare {
 	interface Env {
 		MEDIA: R2Bucket;
 		DB: D1Database;
+		SESSION: KVNamespace;
+		CACHE: KVNamespace;
 	}
 }
 interface Env extends Cloudflare.Env {}
