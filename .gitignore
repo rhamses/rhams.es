@@ -13,3 +13,7 @@ data.db
 
 # Local Wrangler / Cloudflare state
 .wrangler
+
+# Tauri / PWA
+src-tauri/target/
+dev-dist/

@@ -1,0 +1,10 @@
+{
+  "$schema": "../gen/schemas/desktop-schema.json",
+  "identifier": "default",
+  "description": "Desktop demo window. Release builds load https://rhams.es.",
+  "windows": ["main"],
+  "remote": {
+    "urls": ["https://rhams.es/*", "https://*.rhams.es/*"]
+  },
+  "permissions": ["core:default"]
+}
