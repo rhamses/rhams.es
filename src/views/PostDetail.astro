@@ -555,14 +555,14 @@ const ui =
 		font-size: var(--font-size-2xl);
 		margin-top: 2.5em;
 		margin-bottom: 0.75em;
-		scroll-margin-top: calc(var(--nav-height) + var(--spacing-4));
+		scroll-margin-top: calc(var(--nav-height) + var(--spacing-4) + env(safe-area-inset-top));
 	}
 
 	.article-content :global(h3) {
 		font-size: var(--font-size-xl);
 		margin-top: 2em;
 		margin-bottom: 0.5em;
-		scroll-margin-top: calc(var(--nav-height) + var(--spacing-4));
+		scroll-margin-top: calc(var(--nav-height) + var(--spacing-4) + env(safe-area-inset-top));
 	}
 
 	.article-content :global(blockquote) {
