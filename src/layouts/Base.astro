@@ -15,6 +15,7 @@ import { publishVersion } from "../utils/content-version";
 import appleSplashScreens from "../utils/apple-splash-screens.json";
 import { resolveBlogSiteIdentity } from "../utils/site-identity";
 import { localePath, localeTag } from "../utils/i18n";
+import PageLoader from "../components/PageLoader.astro";
 import "../styles/tokens.css";
 import "../styles/theme.css";
 
@@ -145,6 +146,7 @@ const pageCtx = createPublicPageContext({
 		</script>
 	</head>
 	<body>
+		<PageLoader />
 		<EmDashBodyStart page={pageCtx} />
 		<header class="site-header">
 			<nav class="nav">
@@ -513,17 +515,25 @@ const pageCtx = createPublicPageContext({
 				 * Design tokens live in src/styles/tokens.css. Colors are
 				 * defined with light-dark(); these rules pin the scheme when
 				 * the footer switcher sets an explicit choice. With no class,
-				 * color-scheme: light dark follows the OS preference. The
-				 * @supports guard keeps the toggle from forcing dark UA form
-				 * controls on browsers stuck on the plain-light fallback.
+				 * color-scheme: light dark follows the OS preference.
+				 *
+				 * Keep these rules outside @supports: the build compiles
+				 * light-dark() to variables and only rewrites top-level
+				 * color-scheme declarations to switch them. Browsers stuck on
+				 * the plain-light fallback stay light so the toggle does not
+				 * force dark UA form controls there.
 				 */
-				@supports (color: light-dark(#000, #fff)) {
-					:root.light {
-						color-scheme: light;
-					}
+				:root.light {
+					color-scheme: light;
+				}
 
+				:root.dark {
+					color-scheme: dark;
+				}
+
+				@supports not (color: light-dark(#000, #fff)) {
 					:root.dark {
-						color-scheme: dark;
+						color-scheme: light;
 					}
 				}
 
