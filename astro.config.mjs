@@ -52,21 +52,24 @@ export default defineConfig({
 			disable: isTauri,
 			outDir: clientDir,
 			registerType: "autoUpdate",
-			includeAssets: ["favicon.svg", "offline.html"],
+			includeAssets: ["favicon.ico", "apple-touch-icon.png", "offline.html"],
 			manifest: {
 				name: "Rhamsés Blog",
 				short_name: "rhams.es",
 				description: "Artigos sobre engenharia de software e desenvolvimento web.",
 				theme_color: "#0066cc",
-				background_color: "#ffffff",
+				// Android builds the PWA splash screen from this colour and the icons.
+				background_color: "#000c1c",
 				display: "standalone",
 				start_url: "/",
 				icons: [
+					{ src: "icon-192.png", sizes: "192x192", type: "image/png", purpose: "any" },
+					{ src: "icon-512.png", sizes: "512x512", type: "image/png", purpose: "any" },
 					{
-						src: "favicon.svg",
-						sizes: "any",
-						type: "image/svg+xml",
-						purpose: "any",
+						src: "icon-maskable-512.png",
+						sizes: "512x512",
+						type: "image/png",
+						purpose: "maskable",
 					},
 				],
 			},
@@ -76,7 +79,8 @@ export default defineConfig({
 				// page, even online. Pages always go to the network instead.
 				navigateFallback: null,
 				globPatterns: ["**/*.{css,js,html,svg,png,ico,txt,woff,woff2,webp}"],
-				globIgnores: ["**/PluginRegistry*.js"],
+				// iOS fetches only the splash screen matching the device.
+				globIgnores: ["**/PluginRegistry*.js", "splash/**"],
 				runtimeCaching: [
 					{
 						urlPattern: ({ request, url }) =>

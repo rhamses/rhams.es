@@ -31,7 +31,8 @@ function cacheRequestFor(url: URL, generation: string): Request {
 }
 
 async function cacheGeneration(env: Env): Promise<string> {
-	return (await env.CACHE.get(GEN_KEY)) ?? "0";
+	const generation = (await env.CACHE.get(GEN_KEY)) ?? "0";
+	return `${env.CF_VERSION_METADATA.id}:${generation}`;
 }
 
 async function versionResponse(url: URL, env: Env): Promise<Response> {
