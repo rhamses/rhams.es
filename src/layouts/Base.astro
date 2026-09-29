@@ -12,6 +12,7 @@ import { Font } from "astro:assets";
 import { env } from "cloudflare:workers";
 import { pwaInfo } from "virtual:pwa-info";
 import { publishVersion } from "../utils/content-version";
+import appleSplashScreens from "../utils/apple-splash-screens.json";
 import { resolveBlogSiteIdentity } from "../utils/site-identity";
 import { localePath, localeTag } from "../utils/i18n";
 import "../styles/tokens.css";
@@ -110,8 +111,19 @@ const pageCtx = createPublicPageContext({
 	<head>
 		<meta charset="UTF-8" />
 		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+		<link rel="icon" href="/favicon.ico" sizes="16x16 32x32 48x48" />
+		<link rel="icon" type="image/png" href="/icon-192.png" sizes="192x192" />
+		<link rel="apple-touch-icon" href="/apple-touch-icon.png" />
 		<meta name="theme-color" content="#0066cc" />
+		<meta name="mobile-web-app-capable" content="yes" />
+		<meta name="apple-mobile-web-app-capable" content="yes" />
+		{appleSplashScreens.map(({ width, height, ratio }) => (
+			<link
+				rel="apple-touch-startup-image"
+				href={`/splash/apple-splash-${width * ratio}x${height * ratio}.png`}
+				media={`(device-width: ${width}px) and (device-height: ${height}px) and (-webkit-device-pixel-ratio: ${ratio}) and (orientation: portrait)`}
+			/>
+		))}
 		<meta name="content-version" content={contentVersion} />
 		{pwaInfo && <Fragment set:html={pwaInfo.webManifest.linkTag} />}
 		<script src="../pwa.ts"></script>

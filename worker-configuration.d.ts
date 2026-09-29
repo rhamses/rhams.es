@@ -7,6 +7,7 @@ declare namespace Cloudflare {
 		DB: D1Database;
 		SESSION: KVNamespace;
 		CACHE: KVNamespace;
+		CF_VERSION_METADATA: WorkerVersionMetadata;
 	}
 }
 interface Env extends Cloudflare.Env {}
