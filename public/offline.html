@@ -21,13 +21,82 @@
 			a {
 				color: #0066cc;
 			}
+			.status {
+				color: #666;
+			}
 		</style>
 	</head>
 	<body>
 		<main>
-			<h1>Sem conexão</h1>
-			<p>Esta página não está no cache do app. Quando a rede voltar, recarregue.</p>
-			<p><a href="/">Voltar ao início</a></p>
+			<h1 data-text="title">Sem conexão</h1>
+			<p data-text="body">Esta página não está no cache do app. Quando a rede voltar, toque em voltar ao início.</p>
+			<p><a href="/" id="reconnect" data-text="action">Voltar ao início</a></p>
+			<p class="status" id="status" role="status" aria-live="polite"></p>
 		</main>
+		<script>
+			const TEXT = {
+				pt: {
+					title: "Sem conexão",
+					body: "Esta página não está no cache do app. Quando a rede voltar, toque em voltar ao início.",
+					action: "Voltar ao início",
+					trying: "Tentando reconectar…",
+					offline: "Ainda sem conexão. Tente de novo em instantes.",
+					home: "/",
+				},
+				en: {
+					title: "No connection",
+					body: "This page is not in the app cache. When the network is back, tap back to home.",
+					action: "Back to home",
+					trying: "Trying to reconnect…",
+					offline: "Still offline. Try again in a moment.",
+					home: "/en/",
+				},
+			};
+			const lang = /^\/en(?:\/|$)/.test(location.pathname) ? "en" : "pt";
+			const text = TEXT[lang];
+			document.documentElement.lang = lang;
+			document.title = `${text.title} — rhams.es`;
+			for (const el of document.querySelectorAll("[data-text]")) {
+				el.textContent = text[el.dataset.text];
+			}
+
+			const link = document.getElementById("reconnect");
+			const status = document.getElementById("status");
+			link.href = text.home;
+			let busy = false;
+
+			// Drops every cache and the service worker before going home, so a
+			// broken or stale worker cannot keep serving this page.
+			async function reconnect() {
+				if (busy) return;
+				busy = true;
+				status.textContent = text.trying;
+				try {
+					const res = await fetch(`/_site/version?locale=${lang}`, { cache: "no-store" });
+					if (!res.ok) throw new Error(String(res.status));
+				} catch {
+					status.textContent = text.offline;
+					busy = false;
+					return;
+				}
+				if ("caches" in window) {
+					const keys = await caches.keys();
+					await Promise.all(keys.map((key) => caches.delete(key)));
+				}
+				if ("serviceWorker" in navigator) {
+					const registrations = await navigator.serviceWorker.getRegistrations();
+					await Promise.all(registrations.map((registration) => registration.unregister()));
+				}
+				const home = new URL(text.home, location.origin);
+				home.searchParams.set("_refresh", String(Date.now()));
+				location.replace(home);
+			}
+
+			link.addEventListener("click", (event) => {
+				event.preventDefault();
+				reconnect();
+			});
+			window.addEventListener("online", reconnect);
+		</script>
 	</body>
 </html>

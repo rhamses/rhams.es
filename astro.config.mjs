@@ -72,10 +72,19 @@ export default defineConfig({
 			},
 			workbox: {
 				globDirectory: clientDir,
-				navigateFallback: "/offline.html",
-				navigateFallbackDenylist: [/^\/_emdash/, /^\/rss\.xml/],
+				// navigateFallback would answer every navigation with the offline
+				// page, even online. Pages always go to the network instead.
+				navigateFallback: null,
 				globPatterns: ["**/*.{css,js,html,svg,png,ico,txt,woff,woff2,webp}"],
 				globIgnores: ["**/PluginRegistry*.js"],
+				runtimeCaching: [
+					{
+						urlPattern: ({ request, url }) =>
+							request.mode === "navigate" && !url.pathname.startsWith("/_emdash"),
+						handler: "NetworkOnly",
+						options: { precacheFallback: { fallbackURL: "/offline.html" } },
+					},
+				],
 			},
 			experimental: {
 				directoryAndTrailingSlashHandler: true,
