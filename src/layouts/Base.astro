@@ -111,7 +111,7 @@ const pageCtx = createPublicPageContext({
 <html lang={localeTag(locale)}>
 	<head>
 		<meta charset="UTF-8" />
-		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
 		<link rel="icon" href="/favicon.ico" sizes="16x16 32x32 48x48" />
 		<link rel="icon" type="image/png" href="/icon-192.png" sizes="192x192" />
 		<link rel="apple-touch-icon" href="/apple-touch-icon.png" />
@@ -147,6 +147,7 @@ const pageCtx = createPublicPageContext({
 	</head>
 	<body>
 		<PageLoader />
+		<div class="status-bar-backdrop" aria-hidden="true"></div>
 		<EmDashBodyStart page={pageCtx} />
 		<header class="site-header">
 			<nav class="nav">
@@ -593,10 +594,37 @@ const pageCtx = createPublicPageContext({
 		</style>
 
 		<style>
+			/*
+			 * viewport-fit=cover lets the page draw under the iPhone status
+			 * bar where the app shell reports a safe-area inset; the insets
+			 * are 0 everywhere else.
+			 */
+			body {
+				padding-inline: env(safe-area-inset-left) env(safe-area-inset-right);
+				padding-bottom: env(safe-area-inset-bottom);
+			}
+
+			/*
+			 * Blurs content scrolling under the status bar. Safari reports no
+			 * inset but extends a fixed top bar of at least ~8px into the
+			 * status bar area, hence the 10px floor.
+			 */
+			.status-bar-backdrop {
+				position: fixed;
+				inset: 0 0 auto;
+				z-index: 150;
+				height: max(env(safe-area-inset-top), 10px);
+				pointer-events: none;
+				background: color-mix(in srgb, var(--color-bg) 65%, transparent);
+				backdrop-filter: blur(12px);
+				-webkit-backdrop-filter: blur(12px);
+			}
+
 			.site-header {
 				position: sticky;
 				top: 0;
 				z-index: 100;
+				padding-top: env(safe-area-inset-top);
 				background: color-mix(in srgb, var(--color-bg) 65%, transparent);
 				backdrop-filter: blur(12px);
 				-webkit-backdrop-filter: blur(12px);
@@ -934,7 +962,7 @@ const pageCtx = createPublicPageContext({
 			.update-notice {
 				position: fixed;
 				inset-inline: var(--spacing-4);
-				bottom: var(--spacing-4);
+				bottom: calc(var(--spacing-4) + env(safe-area-inset-bottom));
 				z-index: 200;
 				display: flex;
 				align-items: center;
