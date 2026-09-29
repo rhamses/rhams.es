@@ -40,6 +40,10 @@
 			"binding": "LOADER",
 		},
 	],
+	// Deploy version id: part of the page cache key, so each deploy starts fresh
+	"version_metadata": {
+		"binding": "CF_VERSION_METADATA",
+	},
 	// Drives scheduled publishing, plugin cron, and maintenance (see src/worker.ts)
 	"triggers": {
 		"crons": ["* * * * *"],
